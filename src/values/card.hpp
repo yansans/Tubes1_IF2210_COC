@@ -24,6 +24,10 @@ class Card: public Values{
     int get_number();
     string get_colour();
 
+    friend bool operator== (const Card& c1, const Card& c2){
+        return c1.colour == c2.colour && c1.number == c2.number;
+    }
+
     double get_value() override;
 };
 
