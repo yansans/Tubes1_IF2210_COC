@@ -2,7 +2,7 @@
 #define PLAYER_HPP
 
 #include <bits/stdc++.h>
-#include "PlayerCards.hpp"
+#include "../InventoryHolder/PlayerCards.hpp"
 using namespace std;
 
 class Player
@@ -21,7 +21,7 @@ public:
     long long getPoint() const;
     void addPoint(long long point);
     bool isDone() const;
-    void setDone();
+    void setDone(bool info);
     void takeCards();
     void takeAbilityCard();
     void useAbilityCard();

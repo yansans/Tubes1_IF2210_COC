@@ -26,7 +26,7 @@ bool Player::isDone() const
 {
     return this->done;
 }
-void Player::setDone()
+void Player::setDone(bool info)
 {
-    this->done = true;
+    this->done = info;
 }
