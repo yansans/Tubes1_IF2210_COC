@@ -6,6 +6,7 @@
 class DeckCards : public InventoryHolder{
 public:
     DeckCards();
+    DeckCards(std::string);
 };
 
 

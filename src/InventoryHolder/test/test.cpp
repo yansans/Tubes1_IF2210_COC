@@ -1,14 +1,15 @@
-#include "InventoryHolder.hpp"
-#include "PlayerCards.hpp"
-#include "TableCards.hpp"
-#include "DeckCards.hpp"
-#include "../Exception/Exception.h"
+#include "../InventoryHolder.hpp"
+#include "../PlayerCards.hpp"
+#include "../TableCards.hpp"
+#include "../DeckCards.hpp"
+#include "../../Exception/Exception.h"
 
 /*
-compile : g++ *.cpp ../values/card.cpp -o test
-g++ *.cpp ../values/card.cpp -o test
+compile : 
+g++ ../*.cpp ../../values/card.cpp test.cpp -o test
 ./test
 */
+
 #include <iostream>
 #define print(var)  std::cout << (var) << std::endl;
 #define range(i,s,e) for(int i=s;i<e;i++)
@@ -32,6 +33,15 @@ void testerrorremove(InventoryHolder& ih, Card card){
     }
 }
 
+void testerroraccess(InventoryHolder& ih, int idx){
+    try{
+        ih.getItem(idx);
+        print("gak error")
+    }catch(InventoryOutOfBoundException e){
+        print(e.what())
+    }
+}
+
 void printcard(Card card){
     std::cout << card.get_colour() << " " << card.get_number() << std::endl;
 }
@@ -42,12 +52,7 @@ int main(){
     TableCards tc;
     DeckCards dc;
 
-    try{
-        ih.getItem(5);
-        print("gak error")
-    }catch(InventoryOutOfBoundException e){
-        print(e.what())
-    }
+    testerroraccess(ih, 5);
 
     Card b2(2, "blue");
     Card b3(3, "blue");
@@ -61,13 +66,10 @@ int main(){
 
     range(i,0,2)pc.insertCard(b2);
     range(i,0,5)tc.insertCard(b2);
-    range(i,0,52)dc.insertCard(b2);
 
     testerrorinsert(pc, b3);
     testerrorinsert(tc, b3);
     testerrorinsert(dc, b3);
-
-    range(i,0,52)dc.removeCard(b2);
     
     return 0;
 }

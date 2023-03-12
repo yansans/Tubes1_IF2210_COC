@@ -22,5 +22,16 @@ struct InventoryOutOfBoundException : public exception {
     }
 };
 
+struct InvalidFileInputNamingFormatException : public exception {
+    const char* what() const throw() {
+        return "Invalid card naming format";
+    }
+};
+
+struct InvalidFileInputAmountException : public exception {
+    const char* what() const throw() {
+        return "Too much card in your input";
+    }
+};
 
 #endif

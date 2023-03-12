@@ -4,7 +4,18 @@
 
 InventoryHolder::InventoryHolder(int lim) : limit(lim){ }
 
+InventoryHolder::InventoryHolder(const InventoryHolder& inventory)
+    : limit(inventory.limit) {
+    this->cards = inventory.cards;
+}
+
 InventoryHolder::~InventoryHolder() { }
+
+InventoryHolder InventoryHolder::operator= (const InventoryHolder& inventory)
+{
+    InventoryHolder newInventory(inventory);
+    return newInventory;
+}
 
 void InventoryHolder::insertCard(Card card)
 {
@@ -28,4 +39,34 @@ Card InventoryHolder::getItem(int idx)
 int InventoryHolder::getSize()
 {
     return cards.size();
+}
+
+InventoryHolder operator+ (InventoryHolder& inventory, Card card)
+{
+    InventoryHolder newInventory(inventory);
+    newInventory.insertCard(card);
+    return newInventory;
+}
+
+InventoryHolder operator- (InventoryHolder& inventory, Card card)
+{
+    InventoryHolder newInventory(inventory);
+    newInventory.removeCard(card);
+    return newInventory;
+}
+
+std::istream& operator>> (std::istream& is, InventoryHolder& inventory)
+{   // format : <color> <number>
+    // ! masih bisa duplikat
+    if(inventory.getSize() == inventory.limit)throw InvalidFileInputAmountException(); 
+    std::string color;
+    int number;
+    if(!(is >> color))throw InvalidFileInputNamingFormatException();
+    if(!(is >> number))throw InvalidFileInputNamingFormatException();
+    std::vector<std::string> validColor = {"hijau", "biru", "kuning", "merah"};
+    if(find(validColor.begin(), validColor.end(), color) == validColor.end())throw InvalidFileInputNamingFormatException();
+    if(number < 1 || number > 13)throw InvalidFileInputNamingFormatException();
+    Card card(number, color);
+    inventory.insertCard(card);
+    return is;
 }
