@@ -2,8 +2,8 @@
 #include "../Exception/Exception.h"
 
 Card::Card(int num, string col){
-    if (num < 1 || num > 13) throw InvalidCardNumber();
-    if (col != "hijau" && col != "biru" && col != "kuning" && col != "merah") 
+    if (num < 0 || num > 13) throw InvalidCardNumber();
+    if (col != "hijau" && col != "biru" && col != "kuning" && col != "merah" && col != "none") 
     throw InvalidCardColour();
     number = num;
     colour = col;
