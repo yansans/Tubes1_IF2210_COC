@@ -9,16 +9,17 @@ class Turn
 {
 private:
     int round;
-    int first;
-    int cur;
+    int firstTurn;
+    int curTurn;
     vector<Player> players;
     void nextRound();
 
 public:
     Turn(vector<Player> players);
+    Player currentTurn();
     Player nextTurn();
     void reverse();
-    int getRound() const;  
+    int getRound() const;
 };
 
 #endif
