@@ -23,7 +23,7 @@ void AbilityHolder::removeAbility(Player* player) {
         throw PlayerDoesNotExist();
     }
 
-    this->playerAbility.erase(player);
+    this->playerAbility[player] = NULL;
 }
 
 bool AbilityHolder::checkPlayerHasAbility(Player* player, Ability* ability) {
@@ -40,4 +40,5 @@ Player* AbilityHolder::checkAbilityOwner(Ability* ability) {
             return it->first;
         }
     }
+    throw AbilityDoesNotFoundOrNull();
 }

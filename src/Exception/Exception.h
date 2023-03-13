@@ -70,5 +70,11 @@ struct PlayerDoesNotExist : public exception {
     }
 };
 
+struct AbilityDoesNotFoundOrNull : public exception {
+    const char* what() const throw() {
+        return "No such Ability";
+    }
+};
+
 
 #endif
