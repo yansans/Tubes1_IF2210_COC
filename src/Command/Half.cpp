@@ -4,7 +4,7 @@ void Half::execute(long long &pts, std::string name)
 {
     std::cout << name << " melakukan HALF! ";
     if (pts == 1LL) {
-        std::cout << "Sayangnya poin hadiah sudah bernilai"
+        std::cout << "Sayangnya poin hadiah sudah bernilai "
                   << "1. Poin hadiah tidak berubah.. Giliran dilanjut!" << std::endl;
     }
     else {

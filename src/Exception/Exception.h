@@ -46,4 +46,10 @@ struct InvalidCardColour : public exception {
     }
 };
 
+struct InvalidCommand : public exception {
+    const char* what() const throw() {
+        return "Invalid Command";
+    }
+};
+
 #endif
