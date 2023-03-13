@@ -11,13 +11,14 @@ private:
     int round;
     int firstTurn;
     int curTurn;
-    vector<Player> players;
+    Player *curPlayer;
+    vector<Player *> players;
     void nextRound();
 
 public:
-    Turn(vector<Player> players);
-    Player currentTurn();
-    Player nextTurn();
+    Turn(vector<Player *> players);
+    Player *currentTurn();
+    Player *nextTurn();
     void reverse();
     int getRound() const;
 };
