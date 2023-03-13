@@ -1,7 +1,6 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include <bits/stdc++.h>
 #include "../InventoryHolder/PlayerCards.hpp"
 using namespace std;
 

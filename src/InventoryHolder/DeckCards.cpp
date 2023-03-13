@@ -4,15 +4,23 @@
 #include <fstream>
 #include <algorithm>
 #include <string>
-#include <set>
+#include <random>
+#include <chrono>
+
 
 DeckCards::DeckCards()
     : InventoryHolder(52) {
     std::string validColor[] = {"hijau", "biru", "kuning", "merah"};
+    std::vector<Card> cards;
     for(std::string color : validColor){
         for(int i=1;i<=13;i++){
-            insertCard(Card(i, color));
+            cards.push_back(Card(i, color));
         }
+    }
+
+    std::shuffle(cards.begin(), cards.end(), std::mt19937_64(std::chrono::steady_clock::now().time_since_epoch().count()));
+    for(int i=0;i<52;i++){
+        insertCard(cards[i]);
     }
 }
 
