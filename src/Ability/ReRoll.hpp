@@ -5,10 +5,10 @@
 
 class ReRoll : public Ability {
     public:
-        ReRoll(std::string name);
+        ReRoll();
         ~ReRoll();
 
-        void executeAbility(const Player&);
+        void executeAbility();
 };
 
 # endif

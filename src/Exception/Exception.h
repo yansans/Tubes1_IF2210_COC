@@ -64,5 +64,11 @@ struct InvalidFileNameException : public exception {
     }
 };
 
+struct PlayerDoesNotExist : public exception {
+    const char* what() const throw() {
+        return "There is no such player";
+    }
+};
+
 
 #endif

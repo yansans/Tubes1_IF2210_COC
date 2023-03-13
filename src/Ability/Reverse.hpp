@@ -5,10 +5,10 @@
 
 class Reverse : public Ability {
     public:
-        Reverse(std::string name);
+        Reverse();
         ~Reverse();
 
-        void executeAbility(const Player&);
+        void executeAbility();
 };
 
 # endif

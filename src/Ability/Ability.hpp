@@ -2,26 +2,23 @@
 # define ABILITY_HPP
 
 # include "../Player/Player.hpp"
+# include "../Values/Card.hpp"
+# include "../InventoryHolder/DeckCards.hpp"
+# include "../AbilityHolder/AbilityHolder.hpp"
 
 # include <iostream>
 # include <string>
+using namespace std;
 
 class Ability {
     protected:
-        std::string name;
-        bool isActive;
+        string name;
 
     public:
-        Ability(std::string name);
+        Ability(string name);
         ~Ability();
 
-        std::string getAbilityOwner();
-        void setAbilityOwner(std::string name);
-
-        bool getIsActive();
-        void setIsActive(bool isActive);
-
-        virtual void executeAbility(const Player&) = 0;
+        string getAbilityName() const;
 };
 
 # endif

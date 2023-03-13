@@ -5,10 +5,10 @@
 
 class Switch : public Ability {
     public:
-        Switch(std::string name);
+        Switch();
         ~Switch();
 
-        void executeAbility(const Player&);
+        void executeAbility();
 };
 
 # endif

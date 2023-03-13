@@ -5,10 +5,10 @@
 
 class Quarter : public Ability {
     public:
-        Quarter(std::string name);
+        Quarter();
         ~Quarter();
 
-        void executeAbility(const Player&);
+        void executeAbility();
 };
 
 # endif

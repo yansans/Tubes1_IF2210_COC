@@ -1,10 +1,7 @@
 # include "Quadruple.hpp"
 
-Quadruple::Quadruple(std::string name) : Ability(name) {}
+Quadruple::Quadruple() : Ability("QUADRUPLE") {}
 
 Quadruple::~Quadruple() {}
 
-void Quadruple::executeAbility(const Player& P) {
-    this->isActive = true;
-    // Executes Quadruple
-}
+void Quadruple::executeAbility() {}

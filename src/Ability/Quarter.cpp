@@ -1,10 +1,7 @@
 # include "Quarter.hpp"
 
-Quarter::Quarter(std::string name) : Ability(name) {}
+Quarter::Quarter() : Ability("QUARTER") {}
 
 Quarter::~Quarter() {}
 
-void Quarter::executeAbility(const Player& P) {
-    this->isActive = true;
-    // Executes Quarter
-}
+void Quarter::executeAbility() {}

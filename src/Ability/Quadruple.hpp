@@ -5,10 +5,10 @@
 
 class Quadruple : public Ability {
     public:
-        Quadruple(std::string name);
+        Quadruple();
         ~Quadruple();
 
-        void executeAbility(const Player&);
+        void executeAbility();
 };
 
 # endif

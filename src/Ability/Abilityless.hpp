@@ -5,10 +5,10 @@
 
 class Abilityless : public Ability {
     public:
-        Abilityless(std::string name);
+        Abilityless();
         ~Abilityless();
 
-        void executeAbility(const Player&);
+        void executeAbility();
 };
 
 # endif
