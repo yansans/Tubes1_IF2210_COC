@@ -6,36 +6,134 @@
 using namespace std;
 
 int main(){
-    vector<Card> cards;
-    cards.push_back(Card(2, "biru"));
-    cards.push_back(Card(1, "biru"));
-    cards.push_back(Card(1, "merah"));
-    cards.push_back(Card(4, "merah"));
-    cards.push_back(Card(5, "biru"));
-    cards.push_back(Card(3, "biru"));
-    cout << cards[0].get_value() << endl;
-    cout << cards.size() << endl;
-    Combo combo1(cards);
-    if (combo1.flush_check()) cout << "Flush" << endl;
-    else cout << "Not Flush" << endl;
-    if (combo1.straight_check()) cout << "Straight" << endl;
-    else cout << "Not Straight" << endl;
+    vector<Card> cards1;
+    cards1.push_back(Card(3, "kuning"));
+    cards1.push_back(Card(2, "biru"));
+    cards1.push_back(Card(2, "kuning"));
+    cards1.push_back(Card(2, "merah"));
+    cards1.push_back(Card(3, "biru"));
+    cards1.push_back(Card(2, "hijau"));
 
-    cards.clear();
+    Combo combo1(cards1);
 
-    cards.push_back(Card(7, "biru"));
-    cards.push_back(Card(1, "merah"));
-    cards.push_back(Card(1, "kuning"));
-    cards.push_back(Card(2, "hijau"));
-    cards.push_back(Card(2, "biru"));
-    cards.push_back(Card(7, "biru"));
-    cards.push_back(Card(1, "merah"));
-    cout << cards[0].get_value() << endl;
-    Combo combo2(cards);
-    if (combo2.twopair_check()) cout << "Two Pair" << endl;
-    else cout << "Not Two Pair" << endl;
-    if (combo2.fullhouse_check()) cout << "Full House" << endl;
-    else cout << "Not Full House" << endl;
+    // cout << combo1.pair_check(0).first << endl;
+    // cout << combo1.pair_check(0).second << endl;
+
+    if (combo1.is_pair()){
+        cout << combo1.get_pair() << endl;
+    } else {
+        cout << "bukan pair" << endl;
+    }
+
+    // cout << combo1.threekind_check(0).first << endl;
+    // cout << combo1.threekind_check(0).second << endl;
+
+    if (combo1.is_threekind()){
+        cout << combo1.get_threekind() << endl;
+    } else {
+        cout << "bukan threekind" << endl;
+    }
+
+    // cout << combo1.fourkind_check().first << endl;
+    // cout << combo1.fourkind_check().second << endl;
+
+    if (combo1.is_fourkind()){
+        cout << combo1.get_fourkind() << endl;
+    } else {
+        cout << "bukan fourkind" << endl;
+    }
+
+    cout << combo1.get_value() << endl;
+
+    cards1.clear();
+
+    cards1.push_back(Card(3, "kuning"));
+    cards1.push_back(Card(2, "biru"));
+    cards1.push_back(Card(1, "kuning"));
+    cards1.push_back(Card(5, "merah"));
+    cards1.push_back(Card(4, "biru"));
+    cards1.push_back(Card(6, "hijau"));
+
+    combo1 = Combo(cards1);
+
+    // cout << combo1.straight_check().first << endl;
+    // cout << combo1.straight_check().second << endl;
+
+    if (combo1.is_straight()){
+        cout << combo1.get_straight() << endl;
+    } else {
+        cout << "bukan straight" << endl;
+    }
+
+    cout << combo1.get_value() << endl;
+
+    cards1.clear();
+
+    cards1.push_back(Card(3, "kuning"));
+    cards1.push_back(Card(2, "kuning"));
+    cards1.push_back(Card(1, "kuning"));
+    cards1.push_back(Card(5, "kuning"));
+    cards1.push_back(Card(4, "kuning"));
+    cards1.push_back(Card(6, "kuning"));
+
+    combo1 = Combo(cards1);
+
+    // cout << combo1.flush_check().first << endl;
+    // cout << combo1.flush_check().second << endl;
+
+    if (combo1.is_flush()){
+        cout << combo1.get_flush() << endl;
+    } else {
+        cout << "bukan flush" << endl;
+    }
+
+    cout << combo1.get_value() << endl;
+
+    cards1.clear();
+
+    cards1.push_back(Card(2, "merah"));
+    cards1.push_back(Card(3, "kuning"));
+    cards1.push_back(Card(1, "biru"));
+    cards1.push_back(Card(3, "merah"));
+    cards1.push_back(Card(1, "merah"));
+    cards1.push_back(Card(3, "biru"));
+    cards1.push_back(Card(2, "kuning"));
+
+    combo1 = Combo(cards1);
+
+    // cout << combo1.fullhouse_check().first << endl;
+    // cout << combo1.fullhouse_check().second.first << endl;
+    // cout << combo1.fullhouse_check().second.second << endl;
+
+    if (combo1.is_fullhouse()){
+        cout << combo1.get_fullhouse().first << endl;
+        cout << combo1.get_fullhouse().second << endl;
+    } else {
+        cout << "bukan fullhouse" << endl;
+    }
+
+    cout << combo1.get_value() << endl;
+
+    cards1.clear();
+
+    cards1.push_back(Card(2, "merah"));
+    cards1.push_back(Card(3, "kuning"));
+    cards1.push_back(Card(1, "biru"));
+
+    combo1 = Combo(cards1);
+
+    // cout << combo1.twopair_check().first << endl;
+    // cout << combo1.twopair_check().second.first << endl;
+    // cout << combo1.twopair_check().second.second << endl;
+
+    if (combo1.is_twopair()){
+        cout << combo1.get_twopair().first << endl;
+        cout << combo1.get_twopair().second << endl;
+    } else {
+        cout << "bukan twopair" << endl;
+    }
+
+    cout << combo1.get_value() << endl;
 
     return 0;
 }
