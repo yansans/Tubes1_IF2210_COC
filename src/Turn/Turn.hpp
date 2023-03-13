@@ -1,7 +1,8 @@
 #ifndef TURN_HPP
 #define TURN_HPP
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <algorithm>
 #include "../Player/Player.hpp"
 using namespace std;
 
