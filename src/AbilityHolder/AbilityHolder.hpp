@@ -16,8 +16,9 @@ class AbilityHolder {
         void addAbility(Player*, Ability*);
         void removeAbility(Player*); // Remove the ability from a player
 
-        bool checkPlayerHasAbility(Player*, Ability*); // Check if the player has the given ability
+        bool playerHasAbility(Player*, Ability*); // Check if the player has the given ability
 
+        Ability* checkPlayerAbility(Player*);
         Player* checkAbilityOwner(Ability*); // Who the given ability belongs to
 };
 

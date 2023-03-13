@@ -26,12 +26,17 @@ void AbilityHolder::removeAbility(Player* player) {
     this->playerAbility[player] = NULL;
 }
 
-bool AbilityHolder::checkPlayerHasAbility(Player* player, Ability* ability) {
+bool AbilityHolder::playerHasAbility(Player* player, Ability* ability) {
+    return checkPlayerAbility(player) == ability;
+}
+
+Ability* AbilityHolder::checkPlayerAbility(Player* player) {
     auto it = this->playerAbility.find(player);
     if(it == this->playerAbility.end()) {
         throw PlayerDoesNotExist();
     }
-    return this->playerAbility[player] == ability;
+
+    return this->playerAbility[player];
 }
 
 Player* AbilityHolder::checkAbilityOwner(Ability* ability) {
