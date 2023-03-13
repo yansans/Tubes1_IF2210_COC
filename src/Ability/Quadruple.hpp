@@ -11,4 +11,4 @@ class Quadruple : public Ability {
         void executeAbility(const Player&);
 };
 
-# endif;
+# endif
