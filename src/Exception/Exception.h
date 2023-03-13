@@ -52,4 +52,17 @@ struct InvalidCommand : public exception {
     }
 };
 
+struct InvalidOptionInputException : public exception {
+    const char* what() const throw() {
+        return "Please choose correct option";
+    }
+};
+
+struct InvalidFileNameException : public exception {
+    const char* what() const throw() {
+        return "Filepath not found";
+    }
+};
+
+
 #endif
