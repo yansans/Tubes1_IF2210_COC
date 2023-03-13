@@ -3,6 +3,6 @@ class Values{
 
     public:
 
-    virtual double get_value() = 0;
+    virtual double get_value() const = 0;
     
 };

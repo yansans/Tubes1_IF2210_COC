@@ -14,22 +14,26 @@ class Card: public Values{
     string colour;
     double val;
 
-    double colour_value(string);
-    double number_value(int);
+    double colour_value(string) const;
+    double number_value(int) const;
 
     public:
     Card(int, string);
+    Card(const Card& c);
+    Card& operator= (const Card& c);
     ~Card();
 
-    int get_number();
-    string get_colour();
+    int get_number() const;
+    string get_colour() const;
 
     friend bool operator== (const Card& c1, const Card& c2);
 
     friend bool operator< (Card& c1,  Card& c2);
 
+    friend bool operator> (Card& c1,  Card& c2);
+
     friend ostream& operator<< (ostream& os, const Card& c);
 
-    double get_value() override;
+    double get_value() const override;
 };
 #endif
