@@ -1,7 +1,7 @@
 #ifndef __NEXT_HPP__
 #define __NEXT_HPP__
 
-#include "command.hpp"
+#include "Command.hpp"
 
 class Next: public Command {
     public:

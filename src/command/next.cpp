@@ -1,4 +1,4 @@
-#include "next.hpp"
+#include "Next.hpp"
 
 void Next::execute(long long &pts, std::string name)
 {

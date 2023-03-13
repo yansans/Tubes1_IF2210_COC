@@ -1,7 +1,7 @@
 #ifndef __HALF_HPP__
 #define __HALF_HPP__
 
-#include "command.hpp"
+#include "Command.hpp"
 
 class Half: public Command {
     public:

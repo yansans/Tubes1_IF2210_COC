@@ -1,7 +1,7 @@
 #ifndef __DOUBLE_HPP__
 #define __DOUBLE_HPP__
 
-#include "command.hpp"
+#include "Command.hpp"
 
 class Double: public Command {
     public:

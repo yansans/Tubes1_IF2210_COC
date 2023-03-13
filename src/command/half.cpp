@@ -1,4 +1,4 @@
-#include "half.hpp"
+#include "Half.hpp"
 
 void Half::execute(long long &pts, std::string name)
 {

@@ -1,4 +1,4 @@
-#include "double.hpp"
+#include "Double.hpp"
 
 void Double::execute(long long &pts, std::string name)
 {
