@@ -2,7 +2,7 @@
 #define INVENTORYHOLDER_HPP
 
 #include <vector>
-#include "../values/card.hpp"
+#include "../Values/Card.hpp"
 
 class InventoryHolder{ // ! belum abstact
 private:
