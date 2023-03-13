@@ -33,8 +33,11 @@ int main() {
     ah.addAbility(&haraka, &a);
     ah.addAbility(&otang, &qtr);
 
-    cout << ah.checkPlayerHasAbility(&dewana, &rr) << endl;
-    cout << ah.checkPlayerHasAbility(&gustavus, &a) << endl;
+    cout << ah.checkPlayerAbility(&dewana)->getAbilityName() << endl;
+    cout << ah.checkPlayerAbility(&otang)->getAbilityName() << endl;
+
+    cout << ah.playerHasAbility(&dewana, &rr) << endl;
+    cout << ah.playerHasAbility(&gustavus, &a) << endl;
 
     cout << ah.checkAbilityOwner(&qtr)->getName() << endl;
 
