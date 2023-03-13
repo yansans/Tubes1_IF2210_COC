@@ -34,4 +34,16 @@ struct InvalidFileInputAmountException : public exception {
     }
 };
 
+struct InvalidCardNumber : public exception {
+    const char* what() const throw() {
+        return "Your card number is not valid";
+    }
+};
+
+struct InvalidCardColour : public exception {
+    const char* what() const throw() {
+        return "Your card colour is not valid";
+    }
+};
+
 #endif

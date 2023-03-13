@@ -1,7 +1,10 @@
-#include "card.hpp"
+#include "Card.hpp"
+#include "../Exception/Exception.h"
 
 Card::Card(int num, string col){
-    // tambah exception
+    if (num < 1 || num > 13) throw InvalidCardNumber();
+    if (col != "hijau" && col != "biru" && col != "kuning" && col != "merah") 
+    throw InvalidCardColour();
     number = num;
     colour = col;
 }
@@ -30,7 +33,6 @@ string Card::get_colour() const{
 double Card::colour_value(string col) const{
     double mult = 0;
     double val = 0.33;
-    // tambah exception
     if(col == "hijau") mult = 0;
     if(col == "biru") mult = 1;
     if(col == "kuning") mult = 2;
