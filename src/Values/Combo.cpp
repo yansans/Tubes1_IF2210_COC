@@ -197,24 +197,22 @@ double Combo::get_draw_value() const{
     double new_value = 0;
     int type = get_combo_type();
     if (type == 9 || type == 8 || type == 6 || type == 5) {
+        // straight flush, four of a kind, flush, straight
         if (threekind_check().first) new_value = threekind_value();
         else if (twopair_check().first) new_value = twopair_value();
         else if (pair_check().first) new_value = pair_value();
         else new_value = highcard_value();
     }
     else if (type == 7){
+        // full house
         auto duplicate = get_combo_card<pair<Card,Card>>();
         int three_num = duplicate.first.get_number();
         int two_num = duplicate.second.get_number();
         if (threekind_check(three_num).first) new_value = threekind_value(three_num);
         else if (pair_check(two_num).first) new_value = pair_value(two_num);
         else new_value = highcard_value();
-    } else if (type == 4){
-        auto  duplicate = get_combo_card<Card>();
-        int three_num = duplicate.get_number();
-        if (pair_check(three_num).first) new_value = pair_value(three_num);
-        else new_value = highcard_value();
     } else if (type == 3){
+        // two pair
         auto duplicate = get_combo_card<pair<Card,Card>>();
         int first_num = duplicate.first.get_number();
         int second_num = duplicate.second.get_number();
@@ -308,21 +306,28 @@ pair<bool, Card> Combo::number_check(vector<Card> _cards, int req, int loop, int
 pair<bool,Card> Combo::flush_check() const{
     auto copy_cards = cards;
     sort(copy_cards.begin(), copy_cards.end());
+    // mengurut copy_cards dari yang terkecil ke terbesar
     int new_idx, n;
     bool get;
     int idx = copy_cards.size() - 1;
+    // idx adalah index dari kartu terbesar
     string colour = copy_cards[idx].get_colour();
     for (int max = 0; max < 3; max ++){
+        // loop sebanyak 3
         n = 1;
         get = false;
         for (int i = idx - 1 ; i >= 0 ; i--){
+            // loop dari index kartu terbesar - 1 sampai 0
             if (copy_cards[i].get_colour() != colour){
+                // jika warna kartu tidak sama dengan warna kartu terbesar
                 if (!get) new_idx = i;
                 get = true;
             } else n++;
             if (n == 5) return make_pair(true, copy_cards[idx]);
+            // jika warna kartu sama dengan warna kartu terbesar sebanyak 5
         }    
         idx = new_idx;
+        // mengubah idx menjadi index kartu yang sama dengan warna kartu terbesar
         colour = copy_cards[idx].get_colour();
     }
     return make_pair(false, Card(0, "none"));
