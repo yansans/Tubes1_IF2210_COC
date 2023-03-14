@@ -1,7 +1,9 @@
 #include "GameMaster/KerajaanPermen.cpp"
+#include "./InventoryHolder/DeckCards.hpp"
 
-
-int main(){
+DeckCards Deck;
+int main()
+{
     KerajaanPermen game;
     game.playGame();
 
