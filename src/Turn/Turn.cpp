@@ -37,6 +37,6 @@ void Turn::nextRound()
     this->firstTurn = this->curTurn = (this->firstTurn + 1) % 7;
     for (int i = 0; i < 7; i++)
     {
-        players[i]->setDone(false);
+        players[i]->reset();
     }
 }
