@@ -1,6 +1,6 @@
 # include "ReRoll.hpp"
 
-ReRoll::ReRoll() : Ability("REROLL") {}
+ReRoll::ReRoll() : Ability("RE-ROLL") {}
 
 ReRoll::~ReRoll() {}
 

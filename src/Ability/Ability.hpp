@@ -4,7 +4,6 @@
 # include "../Player/Player.hpp"
 # include "../Values/Card.hpp"
 # include "../InventoryHolder/DeckCards.hpp"
-# include "../AbilityHolder/AbilityHolder.hpp"
 
 # include <iostream>
 # include <string>
@@ -28,7 +27,9 @@ class Ability {
         void setIsDisabled(bool);
         bool getIsDisabled();
 
-        virtual void executeAbility(Player&, vector<Player*>);
+        static Player* choosePlayer(vector<Player*>, string, Player*);
+
+        virtual void executeAbility(Player&, vector<Player*>) = 0;
 };
 
 # endif

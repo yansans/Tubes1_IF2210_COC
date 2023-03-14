@@ -9,6 +9,8 @@ public:
     Card getLeftCard();
     Card getRightCard();
     void displayCard();
+    void setLeftCard(Card);
+    void setRightCard(Card);
 };
 
 #endif

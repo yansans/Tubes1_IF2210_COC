@@ -2,13 +2,14 @@
 # define ABILITYLESS_HPP
 
 # include "Ability.hpp"
+# include <map>
 
 class Abilityless : public Ability {
     public:
         Abilityless();
         ~Abilityless();
 
-        void executeAbility(Player&, vector<Player*>, map<Player, Ability*>);
+        void executeAbility(Player*, vector<Player*>, map<Player*, Ability*>);
 };
 
 # endif
