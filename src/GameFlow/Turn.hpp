@@ -15,10 +15,13 @@ private:
     vector<Player *> players;
 
 public:
+    Turn();
     Turn(vector<Player *> players);
     Player *currentTurn();
     void nextTurn();
     void reverse();
+    vector<Player *> getPlayers();
+    int getCurrentTurn();
 };
 
 #endif
