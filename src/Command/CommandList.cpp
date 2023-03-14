@@ -14,7 +14,6 @@ void CommandList::execute(std::string commandString, long long &points, std::str
             return c + (('A' <= c && c <= 'Z') ? 32 : 0);
         }
     );
-    std::cout << lowerCommandString << std::endl;
     
     if (cmdList.find(lowerCommandString) == cmdList.end()) {
         throw InvalidCommand();
