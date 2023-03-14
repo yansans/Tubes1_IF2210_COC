@@ -8,7 +8,7 @@ class Abilityless : public Ability {
         Abilityless();
         ~Abilityless();
 
-        void executeAbility();
+        void executeAbility(Player&, vector<Player*>, map<Player, Ability*>);
 };
 
 # endif

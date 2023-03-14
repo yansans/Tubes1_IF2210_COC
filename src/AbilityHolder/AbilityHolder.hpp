@@ -20,6 +20,10 @@ class AbilityHolder {
 
         Ability* checkPlayerAbility(Player*);
         Player* checkAbilityOwner(Ability*); // Who the given ability belongs to
+
+        bool abilityCommandIsTrue(string abilityCommand);
+
+        void executeAbility(Player&, string abilityCommand);
 };
 
 # endif
