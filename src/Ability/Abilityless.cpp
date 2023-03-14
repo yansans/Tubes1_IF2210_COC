@@ -4,7 +4,8 @@ Abilityless::Abilityless() : Ability("ABILITYLESS") {}
 
 Abilityless::~Abilityless() {}
 
-void Abilityless::executeAbility(Player& player, vector<Player*> players, map<Player*, Ability*> playerAbility) {
+
+void Abilityless::executeAbility(Player* player, long long& pts, vector<Player*> players, DeckCards& deck, Turn& turn, map<Player*, Ability*> playerAbility) {
     bool allAbilityUsed = true;
 
     for(auto it = playerAbility.begin(); it != playerAbility.end(); it++) {
@@ -14,35 +15,32 @@ void Abilityless::executeAbility(Player& player, vector<Player*> players, map<Pl
     }
 
     if(allAbilityUsed) {
-        playerAbility[&player]->setIsDisabled(true);
-        playerAbility[&player]->setIsUsed(true);
+        playerAbility[player]->setIsDisabled(true);
+        playerAbility[player]->setIsUsed(true);
         cout << "Eits, ternyata semua pemain sudah memakai kartu kemampuan. Yah kamu kena sendiri deh, kemampuanmu menjadi abilityless. Yah, pengunaan kartu ini sia-sia";
     }
     else {
-        cout << player.getName() << " akan mematikan kartu ability lawan!" << endl;
-        cout << "Silahkan pilih pemain yang kartu abilitynya ingin dimatikan:" << endl;
+        cout << player->getName() << " akan mematikan kartu ability lawan!" << endl;
 
-        map<int, Player*> temp;
-        int number = 0;
-        for(int i = 0; i < players.size(); i++) {
-            if(players[i]->getName() != player.getName()) {
-                number++;
-                cout << number << ". " << players[i]->getName();
-                temp[number] = players[i];
+        vector<Player*> targetPlayers;
+        for(Player* target : players){
+            if(target != player) {
+                targetPlayers.push_back(target);
             }
         }
-        cin >> number;
+        Player* choosedPlayer = Ability::choosePlayer(targetPlayers, "ABILITYLESS", player);
 
-        if(playerAbility[temp[number]]->getIsUsed()) {
-            cout << "Kartu ability " << temp[number]->getName() << " telah dipakai sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
+        if(playerAbility[choosedPlayer]->getIsUsed()) {
+            cout << "Kartu ability " << choosedPlayer->getName() << " telah dipakai sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
         }
-        else if(playerAbility[temp[number]]->getIsDisabled()) {
-            cout << "Kartu ability " << temp[number]->getName() << " telah kamu matikan sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
+        else if(playerAbility[choosedPlayer]->getIsDisabled()) {
+            cout << "Kartu ability " << choosedPlayer->getName() << " telah kamu matikan sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
+            throw StillCurrentTurn();
         }
         else {   
-            playerAbility[temp[number]]->setIsDisabled(true);
-            playerAbility[&player]->setIsUsed(true);
-            cout << "Kartu ability pemain " << temp[number]->getName() << " telah dimatikan.";
+            playerAbility[choosedPlayer]->setIsDisabled(true);
+            playerAbility[player]->setIsUsed(true);
+            cout << "Kartu ability pemain " << choosedPlayer->getName() << " telah dimatikan.";
         }
     }
 }

@@ -18,6 +18,7 @@ class Card: public Values{
     double number_value(int) const;
 
     public:
+    Card();
     Card(int, string);
     Card(const Card& c);
     Card& operator= (const Card& c);

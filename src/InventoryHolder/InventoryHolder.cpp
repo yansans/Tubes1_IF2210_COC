@@ -18,6 +18,11 @@ InventoryHolder InventoryHolder::operator=(const InventoryHolder &inventory)
     return newInventory;
 }
 
+void InventoryHolder::clear()
+{
+    cards.clear();
+}
+
 void InventoryHolder::insertCard(Card card)
 {
     if (cards.size() == limit)

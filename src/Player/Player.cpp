@@ -50,7 +50,7 @@ void Player::setCards(PlayerCards cards)
 void Player::reset()
 {
     this->setDone(false);
-    for (int i = 0; i < 2; i++)
+    while(this->cards.getSize() != 0)
     {
         Deck += this->cards.getItem(0);
         this->cards -= this->cards.getItem(0);

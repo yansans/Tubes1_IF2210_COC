@@ -1,6 +1,11 @@
 #include "Card.hpp"
 #include "../Exception/Exception.h"
 
+Card::Card(){
+    number = 1;
+    colour = "none";
+}
+
 Card::Card(int num, string col){
     if (num < 0 || num > 13) throw InvalidCardNumber();
     if (col != "hijau" && col != "biru" && col != "kuning" && col != "merah" && col != "none") 
@@ -69,6 +74,6 @@ bool operator> ( Card& c1,  Card& c2){
 }
 
 ostream& operator<< (ostream& os, const Card& c){
-    os << c.number << " " << c.colour;
+    os << c.number << " (" << c.colour << ")";
     return os;
 }

@@ -1,5 +1,6 @@
 #include "Turn.hpp"
 
+Turn::Turn() {}
 Turn::Turn(vector<Player *> players)
 {
     this->round = this->firstTurn = this->curTurn = 0;
@@ -39,4 +40,12 @@ void Turn::nextRound()
     {
         players[i]->setDone(false);
     }
+}
+
+vector<Player*> Turn::getPlayers() {
+    return this->players;
+}
+
+int Turn::getCurrentTurn() {
+    return this->curTurn;
 }

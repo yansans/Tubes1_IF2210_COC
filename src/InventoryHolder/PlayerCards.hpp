@@ -8,6 +8,9 @@ public:
     PlayerCards();
     Card getLeftCard();
     Card getRightCard();
+    void setLeftCard(Card);
+    void setRightCard(Card);
+    void displayCard();
 };
 
 #endif

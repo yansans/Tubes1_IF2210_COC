@@ -1,6 +1,9 @@
 # include "AbilityHolder.hpp"
+# include <set>
 
-AbilityHolder::AbilityHolder(vector<Player*> players) {
+AbilityHolder::AbilityHolder() {}
+
+AbilityHolder::AbilityHolder(vector<Player*>& players) {
     for(int i = 0; i < players.size(); i++) {
         this->playerAbility[players[i]] = NULL;
     }
@@ -46,4 +49,22 @@ Player* AbilityHolder::checkAbilityOwner(Ability* ability) {
         }
     }
     throw AbilityDoesNotFoundOrNull();
+}
+
+void AbilityHolder::executeAbility(string abilityString, Player* player, long long& pts, vector<Player*> players, DeckCards& deck, Turn& turn) {
+    const set<string> abilityCommand = {"RE-ROLL", "QUADRUPLE", "QUARTER", "REVERSE", "SWAP", "SWITCH", "ABILITYLESS"};
+    if(abilityCommand.find(abilityString) == abilityCommand.end())throw InvalidCommand();
+    if(playerAbility[player] == NULL || playerAbility[player]->getAbilityName() != abilityString) {
+        cout << "Ets, tidak bisa. Kamu tidak punya kartu Ability " << abilityString << '.' << endl;
+        throw StillCurrentTurn();
+    }
+    else {
+        if(abilityString == "REVERSE") {
+            playerAbility[player]->executeAbility(player, pts, players, deck, turn, playerAbility);
+            throw StillCurrentTurn();
+        }
+        else {
+            playerAbility[player]->executeAbility(player, pts, players, deck, turn, playerAbility);
+        }
+    }
 }
