@@ -176,19 +176,19 @@ public:
         if(round == 1){ // ronde awal
             tableCards.clear();
             for(int i=0;i<players.size();i++){
-                players[i]->reset(deckCards);
+                players[i]->reset();
             }
             
             inputDeckCardLoop();
 
             for(Player* player : players){
-                player->takeCards(deckCards);
+                player->takeCards();
             }
         }else{
             tableCards.drawCard(deckCards);
             for(Player* player : players){ // ? naroh ke deck, ambil lagi
-                player->reset(deckCards);
-                player->takeCards(deckCards);
+                player->reset();
+                player->takeCards();
             }
         }
         

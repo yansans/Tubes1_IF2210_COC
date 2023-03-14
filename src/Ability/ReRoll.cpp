@@ -12,8 +12,8 @@ void ReRoll::executeAbility(Player* player, long long& pts, vector<Player*> play
     }
     else{
         cout << "Melakukan pembuangan kartu yang sedang dimiliki" << endl;
-        player->reset(deck);
-        player->takeCards(deck);
+        player->reset();
+        player->takeCards();
         cout << "Kamu mendapatkan 2 kartu baru yaitu:" << endl;
 
         cout << "1. " << player->getCards().getLeftCard() << endl;
