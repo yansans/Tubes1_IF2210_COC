@@ -18,21 +18,31 @@ void Abilityless::executeAbility(Player& player, vector<Player*> players, map<Pl
         playerAbility[&player]->setIsUsed(true);
         cout << "Eits, ternyata semua pemain sudah memakai kartu kemampuan. Yah kamu kena sendiri deh, kemampuanmu menjadi abilityless. Yah, pengunaan kartu ini sia-sia";
     }
-    cout << player.getName() << " akan mematikan kartu ability lawan!" << endl;
-    cout << "Silahkan pilih pemain yang kartu abilitynya ingin dimatikan:" << endl;
+    else {
+        cout << player.getName() << " akan mematikan kartu ability lawan!" << endl;
+        cout << "Silahkan pilih pemain yang kartu abilitynya ingin dimatikan:" << endl;
 
-    map<int, Player*> temp;
-    int number = 0;
-    for(int i = 0; i < players.size(); i++) {
-        if(players[i]->getName() != player.getName()) {
-            number++;
-            cout << number << ". " << players[i]->getName();
-            temp[number] = players[i];
+        map<int, Player*> temp;
+        int number = 0;
+        for(int i = 0; i < players.size(); i++) {
+            if(players[i]->getName() != player.getName()) {
+                number++;
+                cout << number << ". " << players[i]->getName();
+                temp[number] = players[i];
+            }
+        }
+        cin >> number;
+
+        if(playerAbility[temp[number]]->getIsUsed()) {
+            cout << "Kartu ability " << temp[number]->getName() << " telah dipakai sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
+        }
+        else if(playerAbility[temp[number]]->getIsDisabled()) {
+            cout << "Kartu ability " << temp[number]->getName() << " telah kamu matikan sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
+        }
+        else {   
+            playerAbility[temp[number]]->setIsDisabled(true);
+            playerAbility[&player]->setIsUsed(true);
+            cout << "Kartu ability pemain " << temp[number]->getName() << " telah dimatikan.";
         }
     }
-    cin >> number;
-    
-    playerAbility[temp[number]]->setIsDisabled(true);
-    playerAbility[&player]->setIsUsed(true);
-    cout << "Kartu ability pemain " << temp[number] << " telah dimatikan.";
 }
