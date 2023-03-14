@@ -40,3 +40,11 @@ void Turn::nextRound()
         players[i]->setDone(false);
     }
 }
+
+vector<Player*> Turn::getPlayers() {
+    return this->players;
+}
+
+int Turn::getCurrentTurn() {
+    return this->curTurn;
+}

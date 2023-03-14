@@ -8,7 +8,7 @@ class Quarter : public Ability {
         Quarter();
         ~Quarter();
 
-        void executeAbility();
+        void executeAbility(Player*, long long& pts);
 };
 
 # endif

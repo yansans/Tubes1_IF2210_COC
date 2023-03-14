@@ -4,9 +4,11 @@
 # include "../Player/Player.hpp"
 # include "../Values/Card.hpp"
 # include "../InventoryHolder/DeckCards.hpp"
+# include "../Turn/Turn.hpp"
 
 # include <iostream>
 # include <string>
+# include <map>
 using namespace std;
 
 class Ability {

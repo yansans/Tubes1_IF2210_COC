@@ -20,6 +20,8 @@ public:
     Turn(vector<Player *> players);
     Player *currentTurn();
     Player *nextTurn();
+    vector<Player*> getPlayers();
+    int getCurrentTurn();
     void reverse();
     int getRound() const;
 };

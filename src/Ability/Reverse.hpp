@@ -8,7 +8,7 @@ class Reverse : public Ability {
         Reverse();
         ~Reverse();
 
-        void executeAbility();
+        void executeAbility(Player*, Turn&);
 };
 
 # endif

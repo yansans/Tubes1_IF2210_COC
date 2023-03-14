@@ -8,7 +8,7 @@ class Quadruple : public Ability {
         Quadruple();
         ~Quadruple();
 
-        void executeAbility();
+        void executeAbility(Player*, long long& pts);
 };
 
 # endif
