@@ -13,7 +13,7 @@ WARNING_CFLAG 	= -Wall -Wextra
 CPPFLAGS		= $(VERSION) 
 
 # LIST
-CLASSES			= Ability Command Exception InventoryHolder Player Turn Values
+CLASSES			= Ability Command Exception InventoryHolder Player Turn Values AbilityHolder
 MAIN			= $(SOURCE_FOLDER)/main.cpp
 SRC 			= $(foreach class, $(CLASSES), $(wildcard $(SOURCE_FOLDER)/$(class)/*.cpp))\
 				  $(MAIN)
@@ -26,6 +26,7 @@ run: compile
 
 compile:
 	@echo Compiling...
+	@echo $(SRC)
 	@$(CXX) $(CPPFLAGS) $(SRC) -o $(OUTPUT_FOLDER)/$(EXECUTABLE)
 	@echo Compilation Done!
 

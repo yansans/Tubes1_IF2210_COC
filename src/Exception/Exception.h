@@ -76,5 +76,11 @@ struct AbilityDoesNotFoundOrNull : public exception {
     }
 };
 
+struct EmptyContainerException : public exception {
+    const char* what() const throw() {
+        return "Empty container!";
+    }
+};
+
 
 #endif
