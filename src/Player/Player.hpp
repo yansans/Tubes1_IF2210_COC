@@ -25,6 +25,9 @@ public:
     void takeAbilityCard();
     void useAbilityCard();
     void reset();
+    bool operator==(const Player &other);
+    bool operator<(const Player &other);
+    bool operator>(const Player &other);
 };
 
 #endif

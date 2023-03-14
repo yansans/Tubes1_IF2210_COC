@@ -30,3 +30,19 @@ void Player::setDone(bool info)
 {
     this->done = info;
 }
+void Player::reset()
+{
+    this->setDone(false);
+}
+bool Player::operator==(const Player &other)
+{
+    return this->getPoint() == other.getPoint();
+}
+bool Player::operator<(const Player &other)
+{
+    return this->getPoint() < other.getPoint();
+}
+bool Player::operator>(const Player &other)
+{
+    return this->getPoint() > other.getPoint();
+}
