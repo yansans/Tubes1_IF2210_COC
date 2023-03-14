@@ -74,6 +74,8 @@ class Combo: public Values{
 
     double get_draw_value() const;
 
+    void print_type() const;
+
     friend void printCards(vector<Card> cards);
 }; 
 

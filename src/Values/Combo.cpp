@@ -160,6 +160,39 @@ double Combo::get_value() const{
     return value;
 }
 
+void Combo::print_type() const{
+    int type = get_combo_type();
+    switch (type){
+        case 1:
+            cout << "High card" << endl;
+            break;
+        case 2:
+            cout << "Pair" << endl;
+            break;
+        case 3:
+            cout << "Two pair" << endl;
+            break;
+        case 4:
+            cout << "Three of a kind" << endl;
+            break;
+        case 5:
+            cout << "Straight" << endl;
+            break;
+        case 6:
+            cout << "Flush" << endl;
+            break;
+        case 7:
+            cout << "Full house" << endl;
+            break;
+        case 8:
+            cout << "Four of a kind" << endl;
+            break;
+        case 9:
+            cout << "Straight flush" << endl;
+            break;
+    }
+}
+
 double Combo::get_draw_value() const{
     double new_value = 0;
     int type = get_combo_type();
@@ -185,8 +218,10 @@ double Combo::get_draw_value() const{
         auto duplicate = get_combo_card<pair<Card,Card>>();
         int first_num = duplicate.first.get_number();
         int second_num = duplicate.second.get_number();
-        if (pair_check(first_num).first) new_value = pair_value(first_num);
-        else if (pair_check(second_num).first) new_value = pair_value(second_num);
+        if (pair_check(first_num).first && 
+            pair_check(first_num).second.get_number() != second_num){
+            new_value = pair_value(first_num);
+        }
         else new_value = highcard_value();
     } else {
         new_value = highcard_value();
