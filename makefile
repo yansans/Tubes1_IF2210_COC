@@ -13,7 +13,7 @@ WARNING_CFLAG 	= -Wall -Wextra
 CPPFLAGS		= $(VERSION) 
 
 # LIST
-CLASSES			= Ability Command Exception InventoryHolder Player Turn Values AbilityHolder
+CLASSES			= Command Exception InventoryHolder Player Turn Values 
 MAIN			= $(SOURCE_FOLDER)/main.cpp
 SRC 			= $(foreach class, $(CLASSES), $(wildcard $(SOURCE_FOLDER)/$(class)/*.cpp))\
 				  $(MAIN)

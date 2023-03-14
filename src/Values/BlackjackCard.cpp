@@ -16,7 +16,13 @@ std::map<std::string, int> BlackjackCard::valuemap = {
     {"A", 11}
 };
 
-double BlackjackCard::get_value()
+double BlackjackCard::get_value() const
 {
-    return (double)valuemap[value];
+    return (double)(valuemap[value]);
+}
+
+std::ostream& operator<<(std::ostream& out, BlackjackCard c)
+{
+    out << c.value << " " << c.suit;
+    return out;
 }
