@@ -13,10 +13,9 @@ WARNING_CFLAG 	= -Wall -Wextra
 CPPFLAGS		= $(VERSION) 
 
 # LIST
-CLASSES			= Ability Command Exception InventoryHolder Player Turn Values
+CLASSES			= Command Exception InventoryHolder Player Turn Values Util
 MAIN			= $(SOURCE_FOLDER)/main.cpp
-SRC 			= $(foreach class, $(CLASSES), $(wildcard $(SOURCE_FOLDER)/$(class)/*.cpp))\
-				  $(MAIN)
+SRC 			= $(foreach class, $(CLASSES), $(wildcard $(SOURCE_FOLDER)/$(class)/*.cpp))
 
 EXECUTABLE		= MAIN
 
@@ -26,8 +25,23 @@ run: compile
 
 compile:
 	@echo Compiling...
-	@$(CXX) $(CPPFLAGS) $(SRC) -o $(OUTPUT_FOLDER)/$(EXECUTABLE)
+	@$(CXX) $(CPPFLAGS) $(SRC) $(MAIN) -o $(OUTPUT_FOLDER)/$(EXECUTABLE)
 	@echo Compilation Done!
+
+# CLASS DRIVER
+COMMAND_DRIVER	= $(SOURCE_FOLDER)/Command/test/test.cpp
+command: compilecommand
+	@$(OUTPUT_FOLDER)/$^
+
+compilecommand: 
+	@$(CXX) $(CPPFLAGS) $(SRC) $(COMMAND_DRIVER) -o $(OUTPUT_FOLDER)/$@
+
+
+
+
+
+
+
 
 # TEMPORARY FLAG FOR KERAJAAN PERMEN
 CLASSESPERMEN			= Ability Command Exception InventoryHolder Player Turn Values

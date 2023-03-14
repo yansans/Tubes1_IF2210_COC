@@ -3,6 +3,7 @@
 
 #include "Card.hpp"
 #include <vector>
+#include <utility>
 
 using namespace std;
 
@@ -20,6 +21,16 @@ class Combo: public Values{
     pair<bool, pair<Card,Card>> twopair_check() const;
     pair<bool,Card> pair_check(int duplicate = 0) const;
 
+    Card get_straightflush() const;
+    Card get_fourkind() const;
+    pair<Card,Card> get_fullhouse() const;
+    Card get_flush() const;
+    Card get_straight() const;
+    Card get_threekind(int duplicate = 0) const;
+    pair<Card,Card> get_twopair() const;
+    Card get_pair(int duplicate = 0) const;
+    Card get_highcard() const;
+
     const double HIGH_CARD = 1.39;
     const double PAIR = (HIGH_CARD * 2) + 2;
     const double TWO_PAIR = PAIR + (HIGH_CARD * 2) + 2;
@@ -30,6 +41,7 @@ class Combo: public Values{
     const double FOUR_KIND = FULL_HOUSE + HIGH_CARD + 15;
     const double STRAIGHT_FLUSH = FOUR_KIND + HIGH_CARD + 20;
 
+    double highcard_value() const;
     double pair_value(int duplicate = 0) const;
     double twopair_value()const;
     double threekind_value(int duplicate = 0)const;
@@ -49,23 +61,10 @@ class Combo: public Values{
 
     vector<Card> get_cards() const;
 
-    bool is_straightflush() const;
-    bool is_fourkind() const;
-    bool is_fullhouse() const;
-    bool is_flush() const;
-    bool is_straight() const;
-    bool is_threekind(int duplicate = 0) const;
-    bool is_twopair() const;
-    bool is_pair(int duplicate = 0) const;
+    int get_combo_type() const;
 
-    Card get_straightflush() const;
-    Card get_fourkind() const;
-    pair<Card,Card> get_fullhouse() const;
-    Card get_flush() const;
-    Card get_straight() const;
-    Card get_threekind(int duplicate = 0) const;
-    pair<Card,Card> get_twopair() const;
-    Card get_pair(int duplicate = 0) const;
+    template<typename T>
+    T get_combo_card() const;
 
     bool operator<(const Combo &other) const;
     bool operator>(const Combo &other) const;
@@ -74,6 +73,8 @@ class Combo: public Values{
     double get_value() const override;
 
     double get_draw_value() const;
+
+    void print_type() const;
 
     friend void printCards(vector<Card> cards);
 }; 
