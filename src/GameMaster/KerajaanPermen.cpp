@@ -4,7 +4,7 @@
 #include "../InventoryHolder/TableCards.hpp"
 #include "../Command/CommandList.hpp"
 #include "../AbilityHolder/AbilityHolder.hpp"
-#include "../Turn/Turn.hpp"
+#include "../GameFlow/Turn.hpp"
 
 #include <string>
 #include <fstream>
