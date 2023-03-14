@@ -42,6 +42,11 @@ PlayerCards Player::getCards()
 {
     return this->cards;
 }
+
+void Player::setCards(PlayerCards cards)
+{
+    this->cards = cards;
+}
 void Player::reset(DeckCards &deckCards)
 {
     this->setDone(false);

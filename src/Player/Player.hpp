@@ -23,6 +23,7 @@ public:
     void setDone(bool info);
     void takeCards(DeckCards &deckCards);
     PlayerCards getCards();
+    void setCards(PlayerCards);
     void reset(DeckCards & deckCards);
     bool operator==(const Player &other);
     bool operator<(const Player &other);
