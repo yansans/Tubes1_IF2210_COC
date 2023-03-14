@@ -1,5 +1,6 @@
 #include "Turn.hpp"
 
+Turn::Turn() {}
 Turn::Turn(vector<Player *> players)
 {
     this->round = this->firstTurn = this->curTurn = 0;

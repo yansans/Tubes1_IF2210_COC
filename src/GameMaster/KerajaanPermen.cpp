@@ -3,12 +3,15 @@
 #include "../InventoryHolder/DeckCards.hpp"
 #include "../InventoryHolder/TableCards.hpp"
 #include "../Command/CommandList.hpp"
+#include "../AbilityHolder/AbilityHolder.hpp"
 #include "../Turn/Turn.hpp"
 
 #include <string>
 #include <fstream>
 #include <vector>
 #include <set>
+#include <chrono>
+#include <random>
 using namespace std;
 
 class KerajaanPermen{
@@ -19,6 +22,8 @@ private:
     // ! const long long winningScore = 1LL << 32;
     const long long winningScore = 100;
     long long rewardPoint = 64;
+    AbilityHolder abilityHolder;
+    Turn turn;
     // ? gak dipake const set<string> basicCommand = {"DOUBLE", "NEXT", "HALF"};
     // ? gak dipake const set<string> abilityCommand = {"RE-ROLL", "QUADRUPLE", "QUARTER", "REVERSE", "SWAP", "SWITCH", "ABILITYLESS"};
 
@@ -116,9 +121,8 @@ public:
         catch(InvalidCommand e){
             try{
                 if(input == "GETPOINT")player.addPoint(rewardPoint); // ! sementara buat nge cheat
-                else throw InvalidCommand();
-                // ! execute ability
-            }catch(InvalidCommand e){ // ! exception ability
+                else abilityHolder.executeAbility(input, &player, rewardPoint, players, deckCards, turn);
+            }catch(InvalidCommand e){
                 throw InvalidOptionInputException();
             }
         }
@@ -128,12 +132,31 @@ public:
         return *p1 < *p2;
     }
 
+    vector<Ability*> generateRandomAbility(){
+        vector<Ability*> abilities = {
+            new Abilityless(),
+            new Quadruple(),
+            new Quarter(),
+            new ReRoll(),
+            new Reverse(),
+            new Swap(),
+            new Switch()
+        };
+        shuffle(abilities.begin(), abilities.end(), mt19937_64(chrono::steady_clock::now().time_since_epoch().count()));
+        return abilities;
+    }
+
     void playerMenu(Player& player){
         printf("Giliran %s: \n", player.getName().c_str());
         printf("Pointmu sekarang : %lld\n", player.getPoint());
         player.getCards().displayCard();
         tableCards.displayCard();
-        // ! print punya ability apa
+        if(abilityHolder.checkPlayerAbility(&player) == NULL ||
+            abilityHolder.checkPlayerAbility(&player)->getIsUsed()){
+            printf("Kamu sedang tidak memiliki kartu ability\n");
+        }else{
+            cout << "Kamu memiliki kartu ability : " << abilityHolder.checkPlayerAbility(&player)->getAbilityName() << endl;
+        }
         bool finish = false;
         while(!finish){
             try{
@@ -141,40 +164,65 @@ public:
                 finish = true;
             }catch(InvalidOptionInputException e){
                 printf("Masukan tidak valid, tolong masukan keyword yang sesuai.\n");
+            }catch(StillCurrentTurn e){
+                // emang kosong, jalan lagi
             }
         }
         cout << endl;
         // ! next
     }
 
-    void playGame(){
-        inputPlayers();
-        inputDeckCardLoop();
-        Turn round(players);
-        for(Player* player : players){
-            player->takeCards(deckCards);
-        }
-        int lastRound = 1;
-        while(highestScore() < winningScore){
-        // for(int i=0;i<10;i++){
-            if(round.getRound() != lastRound){ // ? dah bener
-                lastRound = round.getRound();
-                for(Player* player : players){ // ? naroh ke deck, ambil lagi
-                    player->reset(deckCards);
-                    player->takeCards(deckCards);
-                }
-                tableCards.drawCard(deckCards);
+    void drawCards(int round){
+        if(round == 1){ // ronde awal
+            tableCards.clear();
+            for(int i=0;i<players.size();i++){
+                players[i]->reset(deckCards);
             }
-            printf("Ronde : %d\n", round.getRound());
-            Player* currentPlayer = round.currentTurn();
+            
+            inputDeckCardLoop();
+
+            for(Player* player : players){
+                player->takeCards(deckCards);
+            }
+        }else{
+            tableCards.drawCard(deckCards);
+            for(Player* player : players){ // ? naroh ke deck, ambil lagi
+                player->reset(deckCards);
+                player->takeCards(deckCards);
+            }
+        }
+        
+        if(round == 2){
+            vector<Ability *> randomAbilities = generateRandomAbility();
+            for(int i=0;i<players.size();i++){
+                abilityHolder.addAbility(players[i], randomAbilities[i]);
+            }
+        }
+    }
+
+    void gameLoop(){
+        turn = Turn(players);
+        abilityHolder = AbilityHolder(players);
+        int lastRound = 0;
+        while(highestScore() < winningScore){
+            if(turn.getRound() != lastRound){ // ? dah bener
+                lastRound = turn.getRound();
+                drawCards(lastRound);
+            }
+            printf("Ronde : %d\n", turn.getRound());
+            Player* currentPlayer = turn.currentTurn();
             playerMenu(*currentPlayer);
-            round.nextTurn();
+            turn.nextTurn();
             // ? ganti round, last round dah kelar
             // ! cek combo
             // ! Player* winner = getwinner();
             // ! winner->addPoint(rewardPoint);
         }
+    }
 
+    void playGame(){
+        inputPlayers();
+        gameLoop();
         displayEndGame();
         // ! tanya mau ngulang
     }

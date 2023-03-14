@@ -4,13 +4,21 @@
 # include <map>
 
 # include "../Ability/Ability.hpp"
+# include "../Ability/Abilityless.hpp"
+# include "../Ability/Quadruple.hpp"
+# include "../Ability/Quarter.hpp"
+# include "../Ability/ReRoll.hpp"
+# include "../Ability/Reverse.hpp"
+# include "../Ability/Swap.hpp"
+# include "../Ability/Switch.hpp"
 # include "../Exception/Exception.h"
 
 class AbilityHolder {
     private:
         map<Player*, Ability*> playerAbility;
     public:
-        AbilityHolder(vector<Player*>);
+        AbilityHolder();
+        AbilityHolder(vector<Player*>&);
         ~AbilityHolder();
 
         void addAbility(Player*, Ability*);
@@ -23,7 +31,7 @@ class AbilityHolder {
 
         bool abilityCommandIsTrue(string abilityCommand);
 
-        void executeAbility(string abilityString, Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>);
+        void executeAbility(string abilityString, Player*, long long& pts, vector<Player*>, DeckCards&, Turn&);
 };
 
 # endif

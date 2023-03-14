@@ -25,6 +25,7 @@ public:
     friend InventoryHolder &operator-=(InventoryHolder &, Card);
     friend std::istream &operator>>(std::istream &, InventoryHolder &);
     void displayCard();
+    void clear();
 };
 
 #endif

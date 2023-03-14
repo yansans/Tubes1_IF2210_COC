@@ -17,6 +17,7 @@ private:
     void nextRound();
 
 public:
+    Turn();
     Turn(vector<Player *> players);
     Player *currentTurn();
     Player *nextTurn();
