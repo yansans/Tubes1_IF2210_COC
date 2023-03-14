@@ -69,6 +69,27 @@ T maxElement(const T *itrBegin, const T *itrEnd) {
 }
 
 /**
+ * @brief return max element in a vector
+ * 
+ * @tparam P 
+ * @tparam T 
+ * @param vec 
+ * @param lambda atribute to be compared
+ * @return T 
+ */
+template<class P, class T>
+T maxElement(const vector<T> &vec, std::function<P(T)> &lambda) {
+    if (vec.size() == 0) throw EmptyContainerException();
+    T maxEl = vec[0];
+    for (int i = 1; i < vec.size(); i++) {
+        if (lambda(maxEl) < lambda(vec[i])) {
+            maxEl = vec[i];
+        }
+    }
+    return maxEl;
+}
+
+/**
  * @brief return sum of vector elements, described in lambda
  * 
  * @tparam Ret 
