@@ -1,6 +1,7 @@
 #include "../Player/Player.hpp"
 #include "../Exception/Exception.h"
 #include "../InventoryHolder/DeckCards.hpp"
+#include "../InventoryHolder/TableCards.hpp"
 #include "../Command/CommandList.hpp"
 #include "../Turn/Turn.hpp"
 
@@ -13,12 +14,13 @@ using namespace std;
 class KerajaanPermen{
 private:
     vector<Player*> players;
+    TableCards tableCards;
     DeckCards deckCards;
     // ! const long long winningScore = 1LL << 32;
     const long long winningScore = 100;
     long long rewardPoint = 64;
-    const set<string> basicCommand = {"DOUBLE", "NEXT", "HALF"};
-    const set<string> abilityCommand = {"RE-ROLL", "QUADRUPLE", "QUARTER", "REVERSE", "SWAP", "SWITCH", "ABILITYLESS"};
+    // ? gak dipake const set<string> basicCommand = {"DOUBLE", "NEXT", "HALF"};
+    // ? gak dipake const set<string> abilityCommand = {"RE-ROLL", "QUADRUPLE", "QUARTER", "REVERSE", "SWAP", "SWITCH", "ABILITYLESS"};
 
 public:
     void inputPlayers(){
@@ -108,11 +110,13 @@ public:
                 return c - (('a' <= c && c <= 'z') ? 32 : 0);
             }
         );
+        input = upperinput;
 
-        try{CommandList::execute(upperinput, rewardPoint, player.getName());}
+        try{CommandList::execute(input, rewardPoint, player.getName());}
         catch(InvalidCommand e){
             try{
-                if(input == "GETPOINT")player.addPoint(rewardPoint);
+                if(input == "GETPOINT")player.addPoint(rewardPoint); // ! sementara buat nge cheat
+                else throw InvalidCommand();
                 // ! execute ability
             }catch(InvalidCommand e){ // ! exception ability
                 throw InvalidOptionInputException();
@@ -128,6 +132,7 @@ public:
         printf("Giliran %s: \n", player.getName().c_str());
         printf("Pointmu sekarang : %lld\n", player.getPoint());
         player.getCards().displayCard();
+        tableCards.displayCard();
         // ! print punya ability apa
         bool finish = false;
         while(!finish){
@@ -146,19 +151,32 @@ public:
         inputPlayers();
         inputDeckCardLoop();
         Turn round(players);
+        for(Player* player : players){
+            player->takeCards(deckCards);
+        }
+        int lastRound = 1;
         while(highestScore() < winningScore){
         // for(int i=0;i<10;i++){
-            // ! nge bagiin kartu
+            if(round.getRound() != lastRound){ // ? dah bener
+                lastRound = round.getRound();
+                for(Player* player : players){ // ? naroh ke deck, ambil lagi
+                    player->reset(deckCards);
+                    player->takeCards(deckCards);
+                }
+                tableCards.drawCard(deckCards);
+            }
             printf("Ronde : %d\n", round.getRound());
             Player* currentPlayer = round.currentTurn();
             playerMenu(*currentPlayer);
             round.nextTurn();
-            // ! ganti round, last round, cek combo
+            // ? ganti round, last round dah kelar
+            // ! cek combo
             // ! Player* winner = getwinner();
             // ! winner->addPoint(rewardPoint);
         }
 
         displayEndGame();
+        // ! tanya mau ngulang
     }
 
 };
