@@ -5,6 +5,7 @@
 # include "../Values/Card.hpp"
 # include "../InventoryHolder/DeckCards.hpp"
 # include "../Turn/Turn.hpp"
+# include "../Exception/Exception.h"
 
 # include <iostream>
 # include <string>

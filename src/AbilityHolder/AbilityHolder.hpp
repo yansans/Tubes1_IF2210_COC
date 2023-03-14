@@ -23,7 +23,7 @@ class AbilityHolder {
 
         bool abilityCommandIsTrue(string abilityCommand);
 
-        void executeAbility(Player&, string abilityCommand);
+        void executeAbility(string abilityString, Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>);
 };
 
 # endif

@@ -8,6 +8,7 @@ void ReRoll::executeAbility(Player* player, long long& pts, vector<Player*> play
     if(playerAbility[player]->getIsDisabled()) {
         cout << "Oops, kartu ability re-rollmu telah dimatikan sebelumnya :(." << endl;
         cout << "Silahkan lakukan perintah lain." << endl;
+        throw StillCurrentTurn();
     }
     else{
         cout << "Melakukan pembuangan kartu yang sedang dimiliki" << endl;

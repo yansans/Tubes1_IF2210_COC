@@ -47,3 +47,19 @@ Player* AbilityHolder::checkAbilityOwner(Ability* ability) {
     }
     throw AbilityDoesNotFoundOrNull();
 }
+
+void AbilityHolder::executeAbility(string abilityString, Player* player, long long& pts, vector<Player*> players, DeckCards& deck, Turn& turn, map<Player*, Ability*> playerAbility) {
+    if(playerAbility[player]->getAbilityName() != abilityString) {
+        cout << "Ets, tidak bisa. Kamu tidak punya kartu Ability " << abilityString << '.' << endl;
+        throw StillCurrentTurn();
+    }
+    else {
+        if(abilityString == "REVERSE") {
+            playerAbility[player]->executeAbility(player, pts, players, deck, turn, playerAbility);
+            throw StillCurrentTurn();
+        }
+        else {
+            playerAbility[player]->executeAbility(player, pts, players, deck, turn, playerAbility);
+        }
+    }
+}

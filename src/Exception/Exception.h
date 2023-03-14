@@ -82,5 +82,16 @@ struct EmptyContainerException : public exception {
     }
 };
 
+struct InvalidAbility : public exception {
+    const char* what() const throw() {
+        return "Invalid Ability";
+    }
+};
+
+struct StillCurrentTurn : public exception {
+    const char* what() const throw() {
+        return "Continue to current turn";
+    }
+};
 
 #endif

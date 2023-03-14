@@ -8,6 +8,7 @@ void Quadruple::executeAbility(Player* player, long long& pts, vector<Player*> p
     if(playerAbility[player]->getIsDisabled()) {
         cout << "Oops, kartu ability quadruplemu telah dimatikan sebelumnya :(." << endl;
         cout << "Silahkan lakukan perintah lain." << endl;
+        throw StillCurrentTurn();
     }
     else {
         cout << player->getName() << " melakukan QUADRUPLE! Poin hadiah naik dari "

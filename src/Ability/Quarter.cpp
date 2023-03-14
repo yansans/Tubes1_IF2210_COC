@@ -8,6 +8,7 @@ void Quarter::executeAbility(Player* player, long long& pts, vector<Player*> pla
     if(playerAbility[player]->getIsDisabled()) {
         cout << "Oops, kartu ability qaurtermu telah dimatikan sebelumnya :(." << endl;
         cout << "Silahkan lakukan perintah lain." << endl;
+        throw StillCurrentTurn();
     }
     else {
         cout << player->getName() << " melakukan QUARTER! ";

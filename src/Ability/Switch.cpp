@@ -8,6 +8,7 @@ void Switch::executeAbility(Player* player, long long& pts, vector<Player*> play
     if(playerAbility[player]->getIsDisabled()){
         cout << "Oops, kartu ability switchmu telah dimatikan sebelumnya :(." << endl;
         cout << "Silahkan lakukan perintah lain." << endl;
+        throw StillCurrentTurn();
     }else{
         cout << player->getName() << " melakukan switch!" << endl;
 

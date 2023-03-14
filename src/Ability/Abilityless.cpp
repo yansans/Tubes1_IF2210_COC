@@ -35,6 +35,7 @@ void Abilityless::executeAbility(Player* player, long long& pts, vector<Player*>
         }
         else if(playerAbility[choosedPlayer]->getIsDisabled()) {
             cout << "Kartu ability " << choosedPlayer->getName() << " telah kamu matikan sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
+            throw StillCurrentTurn();
         }
         else {   
             playerAbility[choosedPlayer]->setIsDisabled(true);
