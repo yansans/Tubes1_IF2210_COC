@@ -33,14 +33,14 @@ bool Combo::operator==(const Combo &other) const{
 
 
 int Combo::get_combo_type() const{
-    if (straightflush_check().first) return 9;
-    if (fourkind_check().first) return 8;
-    if (fullhouse_check().first) return 7;
-    if (flush_check().first) return 6;
-    if (straight_check().first) return 5;
-    if (threekind_check().first) return 4;
-    if (twopair_check().first) return 3;
-    if (pair_check().first) return 2;
+    if (cards.size() >= 5 && straightflush_check().first) return 9;
+    if (cards.size() >= 4 && fourkind_check().first) return 8;
+    if (cards.size() >= 5 && fullhouse_check().first) return 7;
+    if (cards.size() >= 5 && flush_check().first) return 6;
+    if (cards.size() >= 5 && straight_check().first) return 5;
+    if (cards.size() >= 3 && threekind_check().first) return 4;
+    if (cards.size() >= 4 && twopair_check().first) return 3;
+    if (cards.size() >= 2 && pair_check().first) return 2;
     return 1;
 }
 

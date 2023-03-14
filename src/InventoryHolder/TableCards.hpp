@@ -3,11 +3,12 @@
 
 #include "InventoryHolder.hpp"
 #include "DeckCards.hpp"
+#include "../Storage/DeckStorage.hpp"
 
 class TableCards : public InventoryHolder{
 public:
     TableCards();
-    void drawCard(DeckCards);
+    void drawCard();
     void displayCard();
 };
 

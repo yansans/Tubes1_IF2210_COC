@@ -3,10 +3,10 @@
 TableCards::TableCards()
     : InventoryHolder(5) { }
     
-void TableCards::drawCard(DeckCards deckCards)
+void TableCards::drawCard()
 {
-    insertCard(deckCards.getItem(0));
-    deckCards -= deckCards.getItem(0);
+    insertCard(Deck.getItem(0));
+    Deck -= Deck.getItem(0);
 
 }
 

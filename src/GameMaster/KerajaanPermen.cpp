@@ -5,6 +5,7 @@
 #include "../Command/CommandList.hpp"
 #include "../AbilityHolder/AbilityHolder.hpp"
 #include "../GameFlow/Turn.hpp"
+#include "../Values/PlayerCombo.hpp"
 
 #include <string>
 #include <fstream>
@@ -19,13 +20,10 @@ private:
     vector<Player*> players;
     TableCards tableCards;
     DeckCards deckCards;
-    // ! const long long winningScore = 1LL << 32;
-    const long long winningScore = 100;
+    const long long winningScore = 1LL << 32;
     long long rewardPoint = 64;
     AbilityHolder abilityHolder;
     Turn turn;
-    // ? gak dipake const set<string> basicCommand = {"DOUBLE", "NEXT", "HALF"};
-    // ? gak dipake const set<string> abilityCommand = {"RE-ROLL", "QUADRUPLE", "QUARTER", "REVERSE", "SWAP", "SWITCH", "ABILITYLESS"};
 
 public:
     void inputPlayers(){
@@ -169,14 +167,15 @@ public:
             }
         }
         cout << endl;
-        // ! next
     }
 
     void drawCards(int round){
         if(round == 1){ // ronde awal
+            // hapus semua
             tableCards.clear();
-            for(int i=0;i<players.size();i++){
-                players[i]->reset();
+            for(Player* player : players){
+                player->reset();
+                abilityHolder.removeAbility(player);
             }
             
             inputDeckCardLoop();
@@ -185,7 +184,7 @@ public:
                 player->takeCards();
             }
         }else{
-            tableCards.drawCard(deckCards);
+            tableCards.drawCard();
             for(Player* player : players){ // ? naroh ke deck, ambil lagi
                 player->reset();
                 player->takeCards();
@@ -200,27 +199,33 @@ public:
         }
     }
 
+    void checkWinner(){
+        Player* winner = PlayerCombo::get_winner(players, tableCards);
+        winner->addPoint(rewardPoint);
+        printf("%s menang, dan mendapat poin sebanyak : %lld\n\n", winner->getName().c_str(), rewardPoint);
+    }
+
     void gameLoop(){
         turn = Turn(players);
         abilityHolder = AbilityHolder(players);
         int lastRound = 0;
         while(highestScore() < winningScore){
-            if(turn.getRound() != lastRound){ // ? dah bener
+            if(turn.getRound() != lastRound){
                 lastRound = turn.getRound();
+                if(lastRound != 1){ // cek kalo ganti round, dan bukan ronde awal
+                    checkWinner();
+                }
                 drawCards(lastRound);
             }
             printf("Ronde : %d\n", turn.getRound());
             Player* currentPlayer = turn.currentTurn();
             playerMenu(*currentPlayer);
             turn.nextTurn();
-            // ? ganti round, last round dah kelar
-            // ! cek combo
-            // ! Player* winner = getwinner();
-            // ! winner->addPoint(rewardPoint);
         }
     }
 
     void playGame(){
+        // ! check combo sama ability masih perlu test
         inputPlayers();
         gameLoop();
         displayEndGame();

@@ -11,7 +11,6 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
         cards.push_back(players[i]->getCards().getLeftCard());
         cards.push_back(players[i]->getCards().getRightCard());
         // ! check getter TableCards
-        throw "check getter TableCards";
         for (int j = 0; j < table.getSize(); j++){
             cards.push_back(table.getItem(j));
         }
