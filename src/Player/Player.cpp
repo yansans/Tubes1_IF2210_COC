@@ -30,24 +30,29 @@ void Player::setDone(bool info)
 {
     this->done = info;
 }
-void Player::takeCards(DeckCards &deckCards)
+void Player::takeCards()
 {
     for (int i = 0; i < 2; i++)
     {
-        this->cards += deckCards.getItem(0);
-        deckCards -= deckCards.getItem(0);
+        this->cards += Deck.getItem(0);
+        Deck -= Deck.getItem(0);
     }
 }
 PlayerCards Player::getCards()
 {
     return this->cards;
 }
-void Player::reset(DeckCards &deckCards)
+
+void Player::setCards(PlayerCards cards)
+{
+    this->cards = cards;
+}
+void Player::reset()
 {
     this->setDone(false);
     for (int i = 0; i < 2; i++)
     {
-        deckCards += this->cards.getItem(0);
+        Deck += this->cards.getItem(0);
         this->cards -= this->cards.getItem(0);
     }
 }
