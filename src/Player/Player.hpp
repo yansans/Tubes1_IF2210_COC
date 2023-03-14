@@ -2,6 +2,7 @@
 #define PLAYER_HPP
 
 #include "../InventoryHolder/PlayerCards.hpp"
+#include "../InventoryHolder/DeckCards.hpp"
 using namespace std;
 
 class Player
@@ -10,7 +11,6 @@ private:
     string name;
     long long point;
     PlayerCards cards;
-    // Ability abilityCard;
     bool done;
 
 public:
@@ -21,10 +21,9 @@ public:
     void addPoint(long long point);
     bool isDone() const;
     void setDone(bool info);
-    void takeCards();
-    void takeAbilityCard();
-    void useAbilityCard();
-    void reset();
+    void takeCards(DeckCards &deckCards);
+    PlayerCards getCards();
+    void reset(DeckCards & deckCards);
     bool operator==(const Player &other);
     bool operator<(const Player &other);
     bool operator>(const Player &other);
