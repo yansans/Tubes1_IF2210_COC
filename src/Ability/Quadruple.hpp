@@ -8,7 +8,7 @@ class Quadruple : public Ability {
         Quadruple();
         ~Quadruple();
 
-        void executeAbility(Player*, long long& pts);
+        void executeAbility(Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>);
 };
 
 # endif

@@ -9,7 +9,7 @@ class Switch : public Ability {
         Switch();
         ~Switch();
 
-        void executeAbility(Player*, vector<Player*>, map<Player*, Ability*>);
+        void executeAbility(Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>);
 };
 
 # endif

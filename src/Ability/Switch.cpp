@@ -4,7 +4,7 @@ Switch::Switch() : Ability("SWITCH") {}
 
 Switch::~Switch() {}
 
-void Switch::executeAbility(Player* player, vector<Player*> players, map<Player*, Ability*> playerAbility) {
+void Switch::executeAbility(Player* player, long long& pts, vector<Player*> players, DeckCards& deck, Turn& turn, map<Player*, Ability*> playerAbility) {
     if(playerAbility[player]->getIsDisabled()){
         cout << "Oops, kartu ability switchmu telah dimatikan sebelumnya :(." << endl;
         cout << "Silahkan lakukan perintah lain." << endl;

@@ -8,7 +8,7 @@ class ReRoll : public Ability {
         ReRoll();
         ~ReRoll();
 
-        void executeAbility(Player*, DeckCards&);
+        void executeAbility(Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>);
 };
 
 # endif

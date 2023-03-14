@@ -5,7 +5,7 @@ Abilityless::Abilityless() : Ability("ABILITYLESS") {}
 Abilityless::~Abilityless() {}
 
 
-void Abilityless::executeAbility(Player* player, vector<Player*> players, map<Player*, Ability*> playerAbility) {
+void Abilityless::executeAbility(Player* player, long long& pts, vector<Player*> players, DeckCards& deck, Turn& turn, map<Player*, Ability*> playerAbility) {
     bool allAbilityUsed = true;
 
     for(auto it = playerAbility.begin(); it != playerAbility.end(); it++) {

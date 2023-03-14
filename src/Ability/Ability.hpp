@@ -31,7 +31,7 @@ class Ability {
 
         static Player* choosePlayer(vector<Player*>, string, Player*);
 
-        virtual void executeAbility(Player&, vector<Player*>) = 0;
+        virtual void executeAbility(Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>) = 0;
 };
 
 # endif

@@ -4,7 +4,7 @@ Swap::Swap() : Ability("SWAP") {}
 
 Swap::~Swap() {}
 
-void Swap::executeAbility(Player* player, vector<Player*> players, map<Player*, Ability*> playerAbility) {
+void Swap::executeAbility(Player* player, long long& pts, vector<Player*> players, DeckCards& deck, Turn& turn, map<Player*, Ability*> playerAbility) {
     if(playerAbility[player]->getIsDisabled()){
         cout << "Oops, kartu ability swapmu telah dimatikan sebelumnya :(." << endl;
         cout << "Silahkan lakukan perintah lain." << endl;
