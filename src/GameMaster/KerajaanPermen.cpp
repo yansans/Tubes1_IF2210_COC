@@ -19,7 +19,7 @@ class KerajaanPermen{
 private:
     vector<Player*> players;
     TableCards tableCards;
-    DeckCards deckCards;
+    DeckCards deckCards; // ! belum diganti extern
     const long long winningScore = 1LL << 32;
     long long rewardPoint = 64;
     AbilityHolder abilityHolder;
@@ -211,10 +211,10 @@ public:
         int lastRound = 0;
         while(highestScore() < winningScore){
             if(turn.getRound() != lastRound){
-                lastRound = turn.getRound();
-                if(lastRound != 1){ // cek kalo ganti round, dan bukan ronde awal
+                if(lastRound != 0){ // cek kalo ganti round, dan bukan ronde awal banget (ronde 1 game 1)
                     checkWinner();
                 }
+                lastRound = turn.getRound();
                 drawCards(lastRound);
             }
             printf("Ronde : %d\n", turn.getRound());

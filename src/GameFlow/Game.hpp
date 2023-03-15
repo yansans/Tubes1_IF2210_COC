@@ -12,7 +12,7 @@ private:
 public:
     Game();
     int getGame() const;
-    void nextGame(vector<Player *> &players);
+    void nextGame();
 };
 
 #endif

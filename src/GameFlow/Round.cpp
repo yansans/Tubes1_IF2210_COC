@@ -17,5 +17,5 @@ void Round::nextRound(vector<Player *> &players)
     }
     
     if (this->roundCount == 0)
-        this->nextGame(players);
+        this->nextGame();
 }
