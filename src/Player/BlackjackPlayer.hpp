@@ -15,6 +15,10 @@ class BlackjackPlayer {
     void playTurn(BlackjackDeckCards &deck);
     void playBot(BlackjackDeckCards &deck);
     void askForName();
+    void setName(std::string name);
+    int score();
+
+    void printInfo();
 };
 
 #endif

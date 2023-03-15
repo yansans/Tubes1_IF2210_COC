@@ -26,7 +26,7 @@ bool BlackjackPlayerCards::isLessThan(int x)
 
 bool BlackjackPlayerCards::canSplit()
 {
-    return this->items.size() == 2 && this->items[0].get_value() == this->items[0].get_value();
+    return (this->items.size() == 2) && (this->items[0].get_value() == this->items[1].get_value());
 }
 
 BlackjackDeckCards& operator<<(BlackjackDeckCards& deck, BlackjackPlayerCards& playercards)

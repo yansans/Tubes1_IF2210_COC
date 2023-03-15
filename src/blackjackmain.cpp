@@ -4,8 +4,12 @@
  *          Jika ada pemain dengan nilai sama pada akhir permainan, 
  *          permainan berakhir seri
 */
+#include "BlackjackGameMaster/BlackjackGameMaster.hpp"
+#include "InventoryHolder/DeckCards.hpp"
 
+DeckCards Deck;
 int main() {
-
+    BlackjackGameMaster game;
+    game.playGame();
     return 0;
 }

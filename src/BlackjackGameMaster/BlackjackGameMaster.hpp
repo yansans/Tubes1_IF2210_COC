@@ -3,15 +3,16 @@
 
 #include <iostream>
 
-#include "../Player/Player.hpp"
-#include "../InventoryHolder/DeckCards.hpp"
+#include "../Player/BlackjackPlayer.hpp"
 #include "../InventoryHolder/BlackjackPlayerCards.hpp"
+#include "../InventoryHolder/BlackjackDeckCards.hpp"
 
 
 class BlackjackGameMaster {
     protected:
-    Player player;
-    Player bot;
+    BlackjackPlayer player;
+    BlackjackPlayer bot;
+    BlackjackDeckCards deck;
 
     public:
     void playGame();

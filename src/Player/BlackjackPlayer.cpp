@@ -52,6 +52,15 @@ void BlackjackPlayer::playTurn(BlackjackDeckCards &deck)
                 else throw InvalidCommand();
             }
             else throw InvalidCommand();
+
+            if (this->cards.isBust()) {
+                std::cout << "Anda kalah dari permainan karena skor = " << this->cards.value() << std::endl;
+                break;
+            }
+            else if (this->cards.isBlackjack()) {
+                std::cout << "Selamat! Anda mendapatkan blackjack (skor 21)" << std::endl;
+                break;
+            }
         }
         catch (InvalidCommand e) {
             std::cout << "Invalid command!" << std::endl;
@@ -75,5 +84,22 @@ void BlackjackPlayer::askForName()
 {
     std::cout << "Name: ";
     std::cin >> this->name;
+}
+
+void BlackjackPlayer::setName(std::string name)
+{
+    this->name = name;
+}
+
+int BlackjackPlayer::score()
+{
+    if (this->cards.isBust()) return -1;
+    return this->cards.value();
+}
+
+void BlackjackPlayer::printInfo()
+{
+    std::cout << "Pemain " << name << std::endl
+              << cards << std::endl;
 }
 

@@ -44,10 +44,10 @@ compilecommand:
 
 
 # TEMPORARY FLAG FOR KERAJAAN PERMEN
-CLASSESPERMEN			= Ability Command Exception InventoryHolder Player GameFlow Values AbilityHolder Util
+CLASSESPERMEN			= Ability Command Exception InventoryHolder Player GameFlow Values AbilityHolder Util BlackjackGameMaster
 MAINPERMEN				= $(SOURCE_FOLDER)/kerajaanpermenmain.cpp
 SRCPERMEN 				= $(foreach class, $(CLASSESPERMEN), $(wildcard $(SOURCE_FOLDER)/$(class)/*.cpp))\
-							$(MAINPERMEN)
+							
 
 PERMEN					= Permen
 permen:compilepermen
@@ -56,9 +56,23 @@ permen:compilepermen
 
 compilepermen:
 	@echo Compiling...
-	@$(CXX) $(CPPFLAGS) $(SRCPERMEN) -o $(OUTPUT_FOLDER)/$(PERMEN)
+	@$(CXX) $(CPPFLAGS) $(SRCPERMEN) $(MAINPERMEN) -o $(OUTPUT_FOLDER)/$(PERMEN)
 	@echo Compilation Done!
 
 runpermen:
 	@$(OUTPUT_FOLDER)/$(PERMEN)
 
+
+MAINBLACKJACK 			= $(SOURCE_FOLDER)/blackjackmain.cpp
+BLACKJACK 				= blackjack
+blackjack:compileblackjack
+	@echo Starting program
+	@$(OUTPUT_FOLDER)/$(BLACKJACK)
+
+compileblackjack:
+	@echo Compiling...
+	@$(CXX) $(CPPFLAGS) $(SRCPERMEN) $(MAINBLACKJACK) -o $(OUTPUT_FOLDER)/$(BLACKJACK)
+	@echo Compilation Done!
+
+runblackjack:
+	@$(OUTPUT_FOLDER)/$(BLACKJACK)
