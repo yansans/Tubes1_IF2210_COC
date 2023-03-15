@@ -3,7 +3,6 @@
 
 #include "InventoryHolder.hpp"
 #include "../Values/BlackjackCard.hpp"
-#include "BlackjackPlayerCards.hpp"
 #include "../Exception/Exception.h"
 #include <algorithm>
 #include <string>
@@ -31,7 +30,7 @@ class BlackjackDeckCards: public InventoryHolder<BlackjackCard> {
     void pop();
     
     void shuffle();
-    
+
 };
 
 #endif

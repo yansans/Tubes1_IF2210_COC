@@ -28,6 +28,11 @@ double BlackjackCard::get_value() const
     return (double)(valuemap[value]);
 }
 
+bool BlackjackCard::operator==(const BlackjackCard &o)
+{
+    return this->suit == o.suit && this->value == o.value;
+}
+
 std::ostream& operator<<(std::ostream& out, BlackjackCard c)
 {
     out << c.value << " " << c.suit;

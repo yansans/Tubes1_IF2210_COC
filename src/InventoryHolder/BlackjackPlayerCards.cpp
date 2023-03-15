@@ -46,11 +46,12 @@ BlackjackPlayerCards& BlackjackPlayerCards::operator<<(BlackjackDeckCards& deck)
     return *this;
 }
 
-ostream& operator<<(ostream& out, BlackjackPlayerCards& playercards)
+std::ostream& operator<<(std::ostream& out, BlackjackPlayerCards& playercards)
 {
     std::cout << "Kartu: ";
     for (int i = 0; i < playercards.items.size() - 1; i++) {
         std::cout << playercards.items[i] << " && ";
     }
     std::cout << playercards.items.back();
+    return out;
 }

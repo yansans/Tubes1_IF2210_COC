@@ -34,7 +34,7 @@ class BlackjackPlayerCards: InventoryHolder<BlackjackCard> {
      */
     friend BlackjackDeckCards& operator<<(BlackjackDeckCards& deck, BlackjackPlayerCards& playercards);
     
-    friend ostream& operator<<(ostream& out, BlackjackPlayerCards& playercards);
+    friend std::ostream& operator<<(std::ostream& out, BlackjackPlayerCards& playercards);
 };
 
 #endif
