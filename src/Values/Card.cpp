@@ -37,7 +37,7 @@ string Card::get_colour() const{
 
 double Card::colour_value(string col) const{
     double mult = 0;
-    double val = 0.33;
+    double val = 0.03;
     if(col == "hijau") mult = 0;
     if(col == "biru") mult = 1;
     if(col == "kuning") mult = 2;
