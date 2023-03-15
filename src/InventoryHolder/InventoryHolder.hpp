@@ -19,9 +19,9 @@ public:
         this->cards = inventory.cards;
     }
     ~InventoryHolder() {}
-    InventoryHolder operator=(const InventoryHolder &inventory) { // ! childnya harus bikin lagi
-        InventoryHolder newInventory(inventory);
-        return newInventory;
+    InventoryHolder& operator=(const InventoryHolder &inventory){
+        this->cards = inventory.cards;
+        return *this;
     }
     void insertCard(T card) {
         if (cards.size() == limit)
