@@ -49,14 +49,16 @@ MAINPERMEN				= $(SOURCE_FOLDER)/kerajaanpermenmain.cpp
 SRCPERMEN 				= $(foreach class, $(CLASSESPERMEN), $(wildcard $(SOURCE_FOLDER)/$(class)/*.cpp))\
 							$(MAINPERMEN)
 
+PERMEN					= Permen
 permen:compilepermen
 	@echo Starting program
-	@$(OUTPUT_FOLDER)/Permen
+	@$(OUTPUT_FOLDER)/$(PERMEN)
 
 compilepermen:
 	@echo Compiling...
-	@$(CXX) $(CPPFLAGS) $(SRCPERMEN) -o $(OUTPUT_FOLDER)/Permen
+	@$(CXX) $(CPPFLAGS) $(SRCPERMEN) -o $(OUTPUT_FOLDER)/$(PERMEN)
 	@echo Compilation Done!
 
-
+runpermen:
+	@$(OUTPUT_FOLDER)/$(PERMEN)
 

@@ -13,7 +13,7 @@ void testerrorfile(string path){
     try{
         DeckCards dce(path);
         print("gak error")
-    }catch(exception e){
+    }catch(exception& e){
         print(e.what())
     }
 }
@@ -23,7 +23,8 @@ void printcard(Card card){
 }
 
 int main(){
-    testerrorfile("testFstream.txt");
+    testerrorfile("testFstreamGood.txt");
+    testerrorfile("testFstreamGood2.txt");
     testerrorfile("testFstreamTooMuch.txt");
     testerrorfile("testFstreamFew.txt");
     testerrorfile("testFstreamDuplicate.txt");

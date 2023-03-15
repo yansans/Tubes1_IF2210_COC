@@ -31,26 +31,13 @@ DeckCards::DeckCards(std::string fileName)
     std::string color;
     int number;
     std::vector<std::string> validColor = {"hijau", "biru", "kuning", "merah"};
-    std::set<Card> availableCard;
-    for(int i=1;i<=13;i++){
-        for(std::string color : validColor){
-            availableCard.insert(Card(i, color));
-        }
-    }
 
     for(int i=0;i<52;i++){
-        if(!(fin >> color))throw InvalidFileInputNamingFormatException();
-        if(!(fin >> number))throw InvalidFileInputNamingFormatException();
-        if(std::find(validColor.begin(), validColor.end(), color) == validColor.end())throw InvalidFileInputNamingFormatException();
-        if(number < 1 || number > 13)throw InvalidFileInputNamingFormatException();
-        Card card(number, color);
-        bool alreadyExist = availableCard.find(card) == availableCard.end();
-        if(alreadyExist)
-            throw DuplicateCardException();
-        insertItem(card);
-        availableCard.erase(card);
+        fin >> *this;
     }
-    if(fin >> color)throw InvalidFileInputAmountException();
+    if(fin >> color)
+        throw InvalidFileInputAmountException();
+    fin.close();
 }
 
 std::istream &operator>>(std::istream &is, DeckCards &inventory)

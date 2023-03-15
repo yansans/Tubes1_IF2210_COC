@@ -1,2 +1,5 @@
-biru 1
-hijau 2
+kuning 10
+hijau 13
+biru 2
+merah 5
+biru 4
