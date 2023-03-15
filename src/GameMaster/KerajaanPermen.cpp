@@ -27,6 +27,12 @@ private:
     Turn turn;
 
 public:
+    ~KerajaanPermen(){
+        for(int i=0;i<players.size();i++){
+            delete players[i];
+        }
+    }
+
     void inputPlayers(){
         for(int i=1;i<=7;i++){
             string nama;
@@ -219,6 +225,7 @@ public:
                 if(lastRound == 6){ // cek kalo ganti round, dan bukan ronde awal banget (ronde 1 game 1)
                     checkWinner();
                 }
+                if(highestScore() >= winningScore)break;
                 lastRound = turn.getRound();
                 drawCards(lastRound);
             }
@@ -230,7 +237,6 @@ public:
     }
 
     void playGame(){
-        // ! check combo sama ability masih perlu test
         inputPlayers();
         gameLoop();
         displayEndGame();
