@@ -76,9 +76,32 @@ Card Combo::get_pair(int duplicate) const{
     return pair_check(duplicate).second;
 }
 
-Card Combo::get_highcard() const{
+vector<Card> Combo::remove_duplicate(vector<Card> ordered_cards ,int duplicates) const{
+    if (duplicates == 0){
+        return ordered_cards;
+    }
+    vector<Card> new_cards;
+    for (int i = 0; i < ordered_cards.size(); i++){
+        if (ordered_cards[i].get_number() != duplicates){
+            new_cards.push_back(ordered_cards[i]);
+        }
+    }
+    return new_cards;
+}
+
+Card Combo::get_highcard(int duplicate) const{
     auto copy_cards = get_cards();
     sort(copy_cards.begin(), copy_cards.end());
+    copy_cards = remove_duplicate(copy_cards, duplicate);
+    return copy_cards[copy_cards.size()-1];
+}
+
+Card Combo::get_highcard(vector<int> duplicates) const{
+    auto copy_cards = get_cards();
+    sort(copy_cards.begin(), copy_cards.end());
+    for(int i = 0; i < duplicates.size(); i++){
+        copy_cards = remove_duplicate(copy_cards, duplicates[i]);
+    }
     return copy_cards[copy_cards.size()-1];
 }
 
@@ -222,19 +245,18 @@ double Combo::get_draw_value() const{
         }
         else new_value = highcard_value();
     } else {
+        auto duplicate = get_combo_card<Card>();
+        int num = duplicate.get_number();
         new_value = highcard_value();
     }
     return new_value;
 }
 
-double Combo::highcard_value() const{
-    auto copy_cards = get_cards();
-    sort(copy_cards.begin(), copy_cards.end());
-    return copy_cards[copy_cards.size()-1].get_value();
+double Combo::highcard_value(int duplicate) const{
+    return get_highcard().get_value();
 }
-
 double Combo::pair_value(int duplicate) const{
-    return HIGH_CARD + get_pair(duplicate).get_value() + 2;
+    return HIGH_CARD + get_pair().get_value() + 2;
 }
 double Combo::twopair_value() const{
     return PAIR + get_twopair().first.get_value() + get_twopair().second.get_value() + 2;
@@ -249,7 +271,7 @@ double Combo::flush_value() const{
     return STRAIGHT + get_flush().get_value() + 5;
 }
 double Combo::fullhouse_value() const{
-    return  FLUSH + (get_fullhouse().first.get_value() * 2) + (get_fullhouse().second.get_value()) + 10;
+    return  FLUSH + (get_fullhouse().first.get_value() * 3) + (get_fullhouse().second.get_value() * 0.01) + 10;
 }
 double Combo::fourkind_value() const{
     return  FULL_HOUSE + get_fourkind().get_value() + 15;
@@ -260,7 +282,7 @@ double Combo::straightflush_value() const{
 
 void printCards(vector<Card> cards){
     for (int i = 0; i < (int)cards.size(); i++){
-        cout << cards[i].get_number() << " ";
+        cout << cards[i] << " ";
     }
     cout << endl;
 }
@@ -361,15 +383,15 @@ pair<bool,Card> Combo::straight_check() const{
 }
 
 pair<bool,Card> Combo::fourkind_check() const{
-    return number_check(cards, 4, 4, 0);
+    return number_check(cards, 4, 4);
 }
 
 pair<bool,Card> Combo::threekind_check(int duplicate) const{
-    return number_check(cards, 3, 5, duplicate);
+    return number_check(cards, 3, 5);
 }
 
 pair<bool,Card> Combo::pair_check(int duplicate) const{
-    return number_check(cards, 2, 6, duplicate);
+    return number_check(cards, 2, 6);
 }
 
 pair<bool,Card> Combo::straightflush_check() const{
@@ -413,6 +435,14 @@ pair<bool, pair<Card,Card>> Combo::fullhouse_check() const{
     auto p1 = threekind_check();
     auto p2 = pair_check(p1.second.get_number());
     return make_pair(p1.first && p2.first, make_pair(p1.second, p2.second));
+}
+
+
+ostream& operator<< (ostream& os, Combo c){
+    os << "combo_type: " << c.get_combo_type() << " ";
+    os << "get_value: " << c.get_value() << " ";
+    os << "get_draw_value: " << c.get_draw_value();
+    return os;
 }
 
 

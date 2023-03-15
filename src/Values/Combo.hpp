@@ -10,7 +10,7 @@ using namespace std;
 class Combo: public Values{
     private:
     vector<Card> cards;    
-    pair<bool, Card> number_check(vector<Card>, int req, int loop, int duplicate) const;
+    pair<bool, Card> number_check(vector<Card>, int req, int loop, int duplicate = 0) const;
 
     pair<bool,Card> straightflush_check() const;
     pair<bool,Card> fourkind_check() const;
@@ -29,7 +29,8 @@ class Combo: public Values{
     Card get_threekind(int duplicate = 0) const;
     pair<Card,Card> get_twopair() const;
     Card get_pair(int duplicate = 0) const;
-    Card get_highcard() const;
+    Card get_highcard(int duplicate = 0) const;
+    Card get_highcard(vector<int> duplicates) const;
 
     const double HIGH_CARD = 1.39;
     const double PAIR = (HIGH_CARD * 2) + 2;
@@ -37,12 +38,13 @@ class Combo: public Values{
     const double THREE_KIND = TWO_PAIR + (HIGH_CARD) + 3;
     const double STRAIGHT = THREE_KIND + HIGH_CARD + 5;
     const double FLUSH = STRAIGHT + HIGH_CARD + 5;
-    const double FULL_HOUSE = FLUSH + (HIGH_CARD * 2) + (HIGH_CARD) + 10;
+    const double FULL_HOUSE = FLUSH + (HIGH_CARD * 3) + (HIGH_CARD * 0.01) + 10;
     const double FOUR_KIND = FULL_HOUSE + HIGH_CARD + 15;
     const double STRAIGHT_FLUSH = FOUR_KIND + HIGH_CARD + 20;
 
-    double highcard_value() const;
-    double pair_value(int duplicate = 0) const;
+    double highcard_value(int duplicate = 0) const;
+    double highcard_value(vector<int> duplicates) const;
+    double pair_value(int duplicatate = 0) const;
     double twopair_value()const;
     double threekind_value(int duplicate = 0)const;
     double straight_value()const;
@@ -50,6 +52,8 @@ class Combo: public Values{
     double fullhouse_value()const;
     double fourkind_value()const;
     double straightflush_value()const;
+
+    vector<Card> remove_duplicate(vector<Card> ordered_cards ,int duplicates = 0) const;
 
     public:
 
@@ -77,6 +81,8 @@ class Combo: public Values{
     void print_type() const;
 
     friend void printCards(vector<Card> cards);
+
+    friend ostream& operator<< (ostream& os, Combo c);
 }; 
 
 void printCards(vector<Card> cards);
