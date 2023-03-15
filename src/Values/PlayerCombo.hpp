@@ -1,3 +1,6 @@
+#ifndef PLAYERCOMBO_HPP
+#define PLAYERCOMBO_HPP
+
 #include "Combo.hpp"
 #include "../Player/Player.hpp"
 #include "../InventoryHolder/TableCards.hpp"
@@ -15,3 +18,5 @@ class PlayerCombo{
     static Player* get_winner(vector<Player*> players, TableCards table);
 
 };
+
+#endif
