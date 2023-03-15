@@ -7,6 +7,7 @@
 #include "../GameFlow/Turn.hpp"
 #include "../Values/PlayerCombo.hpp"
 #include "../Util/util.hpp"
+#include "../Storage/DeckStorage.hpp"
 
 #include <string>
 #include <fstream>
@@ -20,7 +21,6 @@ class KerajaanPermen{
 private:
     vector<Player*> players;
     TableCards tableCards;
-    DeckCards deckCards; // ! belum diganti extern
     const long long winningScore = 1LL << 32;
     long long rewardPoint = 64;
     AbilityHolder abilityHolder;
@@ -79,7 +79,7 @@ public:
         bool inputValid = false;
         while(!inputValid){
             try{
-                this->deckCards = inputDeckCard();
+                Deck = inputDeckCard();
                 inputValid = true;
             }catch(InvalidOptionInputException e){
                 printf("Pilihan tidak valid, tolong pilih opsi yang diberikan\n");
@@ -120,7 +120,7 @@ public:
         catch(InvalidCommand e){
             try{
                 if(input == "GETPOINT")player.addPoint(rewardPoint); // ! sementara buat nge cheat
-                else abilityHolder.executeAbility(input, &player, rewardPoint, players, deckCards, turn);
+                else abilityHolder.executeAbility(input, &player, rewardPoint, players, Deck, turn);
             }catch(InvalidCommand e){
                 throw InvalidOptionInputException();
             }
