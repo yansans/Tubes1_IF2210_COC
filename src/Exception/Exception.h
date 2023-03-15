@@ -94,4 +94,11 @@ struct StillCurrentTurn : public exception {
     }
 };
 
+struct DuplicateCardException : public exception {
+    const char* what() const throw() {
+        return "Duplicate Card Detected!";
+    }
+};
+
+
 #endif

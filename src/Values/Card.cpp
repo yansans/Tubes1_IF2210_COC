@@ -57,7 +57,7 @@ bool operator== (const Card& c1, const Card& c2){
     return c1.colour == c2.colour && c1.number == c2.number;
 }
 
-bool operator< ( Card& c1,  Card& c2){
+bool operator< (const Card& c1, const Card& c2){
     if (c1.number == c2.number){
         return c1.colour_value(c1.colour) < c2.colour_value(c2.colour);
     } else {
