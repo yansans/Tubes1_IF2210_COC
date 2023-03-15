@@ -22,7 +22,7 @@ void Swap::executeAbility(Player* player, long long& pts, vector<Player*> player
 
         vector<Player*> targetPlayers2;
         for(Player* target : players){
-            if(target != player) {
+            if(target != player && target != choosedPlayer) {
                 targetPlayers2.push_back(target);
             }
         }
@@ -68,7 +68,7 @@ int Swap::chooseHand(Player& player)
     bool validInput = false;
     int pick;
     while(!validInput){
-        std::cout << "Silakan pilih kartu kanan/kiri pemain_3:" << std::endl;
+        std::cout << "Silakan pilih kartu kanan/kiri " << player.getName() << ":" << std::endl;
         std::cout << "1. Kanan" << std::endl;
         std::cout << "2. Kiri" << std::endl;
         string input;
