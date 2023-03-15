@@ -82,7 +82,7 @@ T maxElement(const vector<T> &vec, std::function<P(T)> &lambda) {
 
 template<class T>
 void sortPointer(vector<T*> &vec) {
-    sort(vec.begin(), vec.end(), [](T *a, T *b) { return a < b; });
+    sort(vec.begin(), vec.end(), [](T *a, T *b) { return *a < *b; });
 }
 
 template<class T>
