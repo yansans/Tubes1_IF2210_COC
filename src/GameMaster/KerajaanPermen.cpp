@@ -6,6 +6,7 @@
 #include "../AbilityHolder/AbilityHolder.hpp"
 #include "../GameFlow/Turn.hpp"
 #include "../Values/PlayerCombo.hpp"
+#include "../Util/util.hpp"
 
 #include <string>
 #include <fstream>
@@ -20,7 +21,7 @@ private:
     vector<Player*> players;
     TableCards tableCards;
     DeckCards deckCards; // ! belum diganti extern
-    const long long winningScore = 1LL << 32;
+    const long long winningScore = 1LL << 10;
     long long rewardPoint = 64;
     AbilityHolder abilityHolder;
     Turn turn;
@@ -89,13 +90,13 @@ public:
     }
 
     long long highestScore(){
-        return (*max_element(players.begin(), players.end(), playerptrcmp))->getPoint();
+        return (maxPointer(players))->getPoint();
     }
 
     void displayEndGame(){
         printf("Permainan berakhir.\n");
         printf("Leaderboard:\n");
-        sort(players.begin(), players.end(), playerptrcmp);
+        sortPointer(players);
         reverse(players.begin(), players.end());
         for(int i=0;i<players.size();i++){
             printf("%d. %s: %lld\n", i+1, players[i]->getName().c_str(), players[i]->getPoint());
@@ -124,10 +125,6 @@ public:
                 throw InvalidOptionInputException();
             }
         }
-    }
-
-    static bool playerptrcmp(Player* p1, Player* p2){
-        return *p1 < *p2;
     }
 
     vector<Ability*> generateRandomAbility(){
