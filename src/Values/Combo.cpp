@@ -218,23 +218,24 @@ double Combo::get_draw_value() const{
         //  flush
         int duplicate = get_combo_card<Card>().get_number();
         duplicates = {duplicate};
-        if (threekind_check(duplicates).first) new_value = threekind_value();
-        else if (twopair_check(duplicates).first) new_value = twopair_value();
-        else if (pair_check(duplicates).first) new_value = pair_value();
+        if (threekind_check().first) new_value = threekind_value();
+        else if (twopair_check().first) new_value = twopair_value();
+        else if (pair_check().first) new_value = pair_value();
         else new_value = highcard_value(duplicates);
     } else if (type == 9 || type == 5){
         // straight flush or straight
         int duplicate = get_combo_card<Card>().get_number();
         duplicates = {duplicate, duplicate-1, duplicate-2, duplicate-3, duplicate-4};
-        if (threekind_check(duplicates).first) new_value = threekind_value();
-        else if (twopair_check(duplicates).first) new_value = twopair_value();
-        else if (pair_check(duplicates).first) new_value = pair_value();
+        if (threekind_check().first) new_value = threekind_value();
+        else if (twopair_check().first) new_value = twopair_value();
+        else if (pair_check().first) new_value = pair_value();
         else new_value = highcard_value(duplicates);
     } else if(type == 8){
         // four of a kind
         int duplicate = get_combo_card<Card>().get_number();
         duplicates = {duplicate};
-        if (threekind_check(duplicates).first) new_value = threekind_value(duplicates);
+        if (fullhouse_check().first) new_value = fullhouse_value();
+        else if (threekind_check(duplicates).first) new_value = threekind_value(duplicates);
         else if (pair_check(duplicates).first) new_value = pair_value(duplicates);
         else new_value = highcard_value(duplicates);
     }
