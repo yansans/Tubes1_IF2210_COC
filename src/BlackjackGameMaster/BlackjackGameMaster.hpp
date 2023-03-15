@@ -9,7 +9,12 @@
 
 
 class BlackjackGameMaster {
-    
+    protected:
+    Player player;
+    Player bot;
+
+    public:
+    void playGame();
 };
 
 #endif

@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <vector>
 
 class BlackjackCard: public Values {
     private:
@@ -13,7 +14,9 @@ class BlackjackCard: public Values {
     std::string value;
 
     public:
+    BlackjackCard(std::string suit, std::string value);
     static std::map<std::string, int> valuemap;
+    static std::vector<std::string> suitList;
     double get_value() const;
     friend std::ostream& operator<<(std::ostream& out, BlackjackCard c);
 };
