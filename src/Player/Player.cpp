@@ -45,7 +45,8 @@ PlayerCards Player::getCards()
 
 void Player::setCards(PlayerCards cards)
 {
-    this->cards = cards;
+    this->cards.setLeftCard(cards.getLeftCard());
+    this->cards.setRightCard(cards.getRightCard());
 }
 void Player::reset()
 {
