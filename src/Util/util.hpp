@@ -87,7 +87,8 @@ void sortPointer(vector<T*> &vec) {
 
 template<class T>
 T* maxPointer(const vector<T*> &vec) {
-    return maxElement(vec, [](T *a) { return *a; });
+    std::function<T(T*)> lambda = [](T *a) { return *a; };
+    return maxElement(vec, lambda);
 }
 
 /**
