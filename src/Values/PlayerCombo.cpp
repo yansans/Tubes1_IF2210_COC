@@ -20,7 +20,11 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
         cards.clear();
     }
 
-    debug_print(combos);
+    for (int i = 0; i < combos.size(); i++){
+        printCards(combos[i].get_cards());
+    }
+    // ! debug print
+    debug_print(combos, players);
 
     auto highest = 0;
     highest_combos.push_back(highest);
@@ -32,6 +36,10 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
         } else if (combos[i] == combos[highest]){
             highest_combos.push_back(i);
         }
+    }
+
+    for (int i = 0; i < highest_combos.size(); i++){
+        cout << "Player " << players[highest_combos[i]]->getName() << " " << combos[highest_combos[i]] << endl;
     }
 
     if (highest_combos.size() == 1){                
@@ -54,11 +62,11 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
 }
 
 
-void PlayerCombo::debug_print(vector<Combo> combos){
+void PlayerCombo::debug_print(vector<Combo> combos, vector<Player*> players){
     cout << endl;
     cout << "debug PlayerCombo" << endl;
     for (int i = 0; i < combos.size(); i++){
-        cout << "Player ke-" << i + 1 << " " << combos[i] << endl;
+        cout << "Player " << players[i]->getName() << " " << combos[i] << endl;
     }
     cout << endl;
 }

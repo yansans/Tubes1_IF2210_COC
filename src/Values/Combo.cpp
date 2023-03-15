@@ -64,7 +64,7 @@ Card Combo::get_straight() const{
     return straight_check().second;
 }
 
-Card Combo::get_threekind(int duplicate) const{
+Card Combo::get_threekind(vector<int> duplicate) const{
     return threekind_check(duplicate).second;
 }
 
@@ -72,7 +72,7 @@ pair<Card,Card> Combo::get_twopair() const{
     return twopair_check().second;
 }
 
-Card Combo::get_pair(int duplicate) const{
+Card Combo::get_pair(vector<int> duplicate) const{
     return pair_check(duplicate).second;
 }
 
@@ -87,13 +87,6 @@ vector<Card> Combo::remove_duplicate(vector<Card> ordered_cards ,int duplicates)
         }
     }
     return new_cards;
-}
-
-Card Combo::get_highcard(int duplicate) const{
-    auto copy_cards = get_cards();
-    sort(copy_cards.begin(), copy_cards.end());
-    copy_cards = remove_duplicate(copy_cards, duplicate);
-    return copy_cards[copy_cards.size()-1];
 }
 
 Card Combo::get_highcard(vector<int> duplicates) const{
@@ -217,52 +210,73 @@ void Combo::print_type() const{
 }
 
 double Combo::get_draw_value() const{
+    vector <int> duplicates = {0};
+    int duplicate = 0;
     double new_value = 0;
     int type = get_combo_type();
-    if (type == 9 || type == 8 || type == 6 || type == 5) {
-        // straight flush, four of a kind, flush, straight
-        if (threekind_check().first) new_value = threekind_value();
-        else if (twopair_check().first) new_value = twopair_value();
-        else if (pair_check().first) new_value = pair_value();
-        else new_value = highcard_value();
+    if (type == 6) {
+        //  flush
+        int duplicate = get_combo_card<Card>().get_number();
+        duplicates = {duplicate};
+        if (threekind_check(duplicates).first) new_value = threekind_value();
+        else if (twopair_check(duplicates).first) new_value = twopair_value();
+        else if (pair_check(duplicates).first) new_value = pair_value();
+        else new_value = highcard_value(duplicates);
+    } else if (type == 9 || type == 5){
+        // straight flush or straight
+        int duplicate = get_combo_card<Card>().get_number();
+        duplicates = {duplicate, duplicate-1, duplicate-2, duplicate-3, duplicate-4};
+        if (threekind_check(duplicates).first) new_value = threekind_value();
+        else if (twopair_check(duplicates).first) new_value = twopair_value();
+        else if (pair_check(duplicates).first) new_value = pair_value();
+        else new_value = highcard_value(duplicates);
+    } else if(type == 8){
+        // four of a kind
+        int duplicate = get_combo_card<Card>().get_number();
+        duplicates = {duplicate};
+        if (threekind_check(duplicates).first) new_value = threekind_value(duplicates);
+        else if (pair_check(duplicates).first) new_value = pair_value(duplicates);
+        else new_value = highcard_value(duplicates);
     }
     else if (type == 7){
         // full house
         auto duplicate = get_combo_card<pair<Card,Card>>();
         int three_num = duplicate.first.get_number();
         int two_num = duplicate.second.get_number();
-        if (threekind_check(three_num).first) new_value = threekind_value(three_num);
-        else if (pair_check(two_num).first) new_value = pair_value(two_num);
-        else new_value = highcard_value();
+        duplicates = {three_num, two_num};
+        if (threekind_check({three_num}).first) new_value = threekind_value({three_num});
+        else if (pair_check(duplicates).first) new_value = pair_value(duplicates);
+        else new_value = highcard_value(duplicates);
     } else if (type == 3){
         // two pair
         auto duplicate = get_combo_card<pair<Card,Card>>();
         int first_num = duplicate.first.get_number();
         int second_num = duplicate.second.get_number();
-        if (pair_check(first_num).first && 
-            pair_check(first_num).second.get_number() != second_num){
-            new_value = pair_value(first_num);
+        duplicates = {first_num, second_num};
+        if (pair_check(duplicates).first){
+            new_value = pair_value(duplicates);
         }
-        else new_value = highcard_value();
+        else new_value = highcard_value(duplicates);
     } else {
-        auto duplicate = get_combo_card<Card>();
-        int num = duplicate.get_number();
-        new_value = highcard_value();
+        int duplicate = get_combo_card<Card>().get_number();
+        duplicates = {duplicate};
+        new_value = highcard_value(duplicates);
     }
     return new_value;
 }
 
-double Combo::highcard_value(int duplicate) const{
-    return get_highcard().get_value();
+double Combo::highcard_value(vector<int> duplicates) const{
+    return get_highcard(duplicates).get_value();
 }
-double Combo::pair_value(int duplicate) const{
-    return HIGH_CARD + get_pair().get_value() + 2;
+
+double Combo::pair_value(vector<int> duplicate) const{
+    return HIGH_CARD + get_pair(duplicate).get_value() + 2;
 }
 double Combo::twopair_value() const{
     return PAIR + get_twopair().first.get_value() + get_twopair().second.get_value() + 2;
 }
-double Combo::threekind_value(int duplicate) const{
-    return TWO_PAIR + get_threekind().get_value() + 3;
+double Combo::threekind_value(vector<int> duplicate) const{
+    return TWO_PAIR + get_threekind(duplicate).get_value() + 3;
 }
 double Combo::straight_value() const{
     return THREE_KIND + get_straight().get_value() + 5;
@@ -287,27 +301,25 @@ void printCards(vector<Card> cards){
     cout << endl;
 }
 
-pair<bool, Card> Combo::number_check(vector<Card> _cards, int req, int loop, int duplicate) const{
+pair<bool, Card> Combo::number_check(vector<Card> _cards, int req, int loop, vector<int> duplicates) const{
     int idx, n, new_idx;
     bool get;
     auto copy_cards = _cards;
     sort(copy_cards.begin(), copy_cards.end());
+    for (int i = 0; i < (int)duplicates.size(); i++){
+        copy_cards = remove_duplicate(copy_cards, duplicates[i]);
+    }
     // mengurut copy_cards dari yang terkecil ke terbesar
     idx = copy_cards.size() - 1;
     // idx adalah index dari kartu terbesar
     int number = copy_cards[idx].get_number();
     // number adalah nomor dari kartu terbesar  
-    while (number == duplicate){
-        // jika nomor kartu terbesar sama dengan duplicate
-        idx--;
-        number = copy_cards[idx].get_number();
-    }
     for (int max = 0; max < loop; max ++){
         // loop sebanyak loop
         n = 1;
         get = false;
         for (int i = idx - 1 ; i >= 0 ; i--){
-            if (copy_cards[i].get_number() != number || number == duplicate){
+            if (copy_cards[i].get_number() != number){
                 // jika nomor kartu tidak sama dengan nomor kartu terbesar 
                 // atau nomor kartu sama dengan duplicate
                 if (!get) new_idx = i;
@@ -386,12 +398,12 @@ pair<bool,Card> Combo::fourkind_check() const{
     return number_check(cards, 4, 4);
 }
 
-pair<bool,Card> Combo::threekind_check(int duplicate) const{
-    return number_check(cards, 3, 5);
+pair<bool,Card> Combo::threekind_check(vector<int> duplicate) const{
+    return number_check(cards, 3, 5, duplicate);
 }
 
-pair<bool,Card> Combo::pair_check(int duplicate) const{
-    return number_check(cards, 2, 6);
+pair<bool,Card> Combo::pair_check(vector<int> duplicate) const{
+    return number_check(cards, 2, 6, duplicate);
 }
 
 pair<bool,Card> Combo::straightflush_check() const{
@@ -420,9 +432,10 @@ pair<bool,Card> Combo::straightflush_check() const{
     return make_pair(false, Card(0, "none"));
 }
 
-pair<bool, pair<Card,Card>> Combo::twopair_check() const{
-    auto p1 = pair_check();
-    auto p2 = pair_check(p1.second.get_number());
+pair<bool, pair<Card,Card>> Combo::twopair_check(vector<int> duplicate) const{
+    auto p1 = pair_check(duplicate);
+    vector<int> duplicate2 = {p1.second.get_number()};
+    auto p2 = pair_check(duplicate2);
     if (p1.first && p2.first) {
         if (p1.second.get_number() > p2.second.get_number()) return make_pair(true, make_pair(p1.second, p2.second));
         else return make_pair(true, make_pair(p2.second, p1.second));
@@ -433,7 +446,7 @@ pair<bool, pair<Card,Card>> Combo::twopair_check() const{
 
 pair<bool, pair<Card,Card>> Combo::fullhouse_check() const{
     auto p1 = threekind_check();
-    auto p2 = pair_check(p1.second.get_number());
+    auto p2 = pair_check({p1.second.get_number()});
     return make_pair(p1.first && p2.first, make_pair(p1.second, p2.second));
 }
 

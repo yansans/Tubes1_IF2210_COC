@@ -10,27 +10,26 @@ using namespace std;
 class Combo: public Values{
     private:
     vector<Card> cards;    
-    pair<bool, Card> number_check(vector<Card>, int req, int loop, int duplicate = 0) const;
+    pair<bool, Card> number_check(vector<Card> _cards, int req, int loop, vector<int> duplicates = {}) const;
 
     pair<bool,Card> straightflush_check() const;
     pair<bool,Card> fourkind_check() const;
     pair<bool, pair<Card,Card>> fullhouse_check() const;
     pair<bool,Card> flush_check() const;
     pair<bool,Card> straight_check() const;
-    pair<bool,Card> threekind_check(int duplicate = 0) const;
-    pair<bool, pair<Card,Card>> twopair_check() const;
-    pair<bool,Card> pair_check(int duplicate = 0) const;
+    pair<bool,Card> threekind_check(vector<int> duplicate = {}) const;
+    pair<bool, pair<Card,Card>> twopair_check(vector<int> duplicate = {}) const;
+    pair<bool,Card> pair_check(vector<int> duplicate = {}) const;
 
     Card get_straightflush() const;
     Card get_fourkind() const;
     pair<Card,Card> get_fullhouse() const;
     Card get_flush() const;
     Card get_straight() const;
-    Card get_threekind(int duplicate = 0) const;
+    Card get_threekind(vector<int> duplicate = {}) const;
     pair<Card,Card> get_twopair() const;
-    Card get_pair(int duplicate = 0) const;
-    Card get_highcard(int duplicate = 0) const;
-    Card get_highcard(vector<int> duplicates) const;
+    Card get_pair(vector<int> duplicate = {}) const;
+    Card get_highcard(vector<int> duplicates = {}) const;
 
     const double HIGH_CARD = 1.39;
     const double PAIR = (HIGH_CARD * 2) + 2;
@@ -42,11 +41,10 @@ class Combo: public Values{
     const double FOUR_KIND = FULL_HOUSE + HIGH_CARD + 15;
     const double STRAIGHT_FLUSH = FOUR_KIND + HIGH_CARD + 20;
 
-    double highcard_value(int duplicate = 0) const;
-    double highcard_value(vector<int> duplicates) const;
-    double pair_value(int duplicatate = 0) const;
+    double highcard_value(vector<int> duplicates = {}) const;
+    double pair_value(vector<int> duplicatate = {}) const;
     double twopair_value()const;
-    double threekind_value(int duplicate = 0)const;
+    double threekind_value(vector<int> duplicate = {})const;
     double straight_value()const;
     double flush_value()const;
     double fullhouse_value()const;

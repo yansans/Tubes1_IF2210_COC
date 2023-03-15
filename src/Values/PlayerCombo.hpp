@@ -12,7 +12,7 @@ using namespace std;
 
 class PlayerCombo{
     private:
-    static void debug_print(vector<Combo> combos);
+    static void debug_print(vector<Combo> combos, vector<Player*> players);
 
     public:
     static Player* get_winner(vector<Player*> players, TableCards table);
