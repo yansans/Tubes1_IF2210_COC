@@ -61,10 +61,12 @@ void AbilityHolder::executeAbility(string abilityString, Player* player, long lo
     else {
         if(abilityString == "REVERSE") {
             playerAbility[player]->executeAbility(player, pts, players, deck, turn, playerAbility);
+            playerAbility[player]->setIsUsed(true);
             throw StillCurrentTurn();
         }
         else {
             playerAbility[player]->executeAbility(player, pts, players, deck, turn, playerAbility);
+            playerAbility[player]->setIsUsed(true);
         }
     }
 }

@@ -52,7 +52,7 @@ Player* Ability::choosePlayer(vector<Player*> targetPlayers, string abilityName,
         try{
             int choosedIndex = stoi(input);
             if(choosedIndex < 1 || choosedIndex > targetPlayers.size())throw PlayerDoesNotExist();
-            choosedPlayer = targetPlayers[choosedIndex];
+            choosedPlayer = targetPlayers[choosedIndex-1];
             validInput = true;
         }catch(...){
             printf("Pilihan tidak valid, tolong pilih opsi yang diberikan\n");

@@ -60,8 +60,6 @@ void Swap::executeAbility(Player* player, long long& pts, vector<Player*> player
         }else{
             card2.setLeftCard(hand1);
         }
-        
-        player->getCards().displayCard();
     }
 }
 
