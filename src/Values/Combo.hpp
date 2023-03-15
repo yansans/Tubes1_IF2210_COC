@@ -37,7 +37,7 @@ class Combo: public Values{
     const double THREE_KIND = TWO_PAIR + (HIGH_CARD) + 3;
     const double STRAIGHT = THREE_KIND + HIGH_CARD + 5;
     const double FLUSH = STRAIGHT + HIGH_CARD + 5;
-    const double FULL_HOUSE = FLUSH + (HIGH_CARD * 2) + 10;
+    const double FULL_HOUSE = FLUSH + (HIGH_CARD * 2) + (HIGH_CARD) + 10;
     const double FOUR_KIND = FULL_HOUSE + HIGH_CARD + 15;
     const double STRAIGHT_FLUSH = FOUR_KIND + HIGH_CARD + 20;
 

@@ -249,7 +249,7 @@ double Combo::flush_value() const{
     return STRAIGHT + get_flush().get_value() + 5;
 }
 double Combo::fullhouse_value() const{
-    return  FLUSH + get_fullhouse().first.get_value() + get_fullhouse().second.get_value() + 10;
+    return  FLUSH + (get_fullhouse().first.get_value() * 2) + (get_fullhouse().second.get_value()) + 10;
 }
 double Combo::fourkind_value() const{
     return  FULL_HOUSE + get_fourkind().get_value() + 15;
