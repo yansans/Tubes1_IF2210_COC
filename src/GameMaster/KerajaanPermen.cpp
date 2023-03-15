@@ -21,7 +21,7 @@ private:
     vector<Player*> players;
     TableCards tableCards;
     DeckCards deckCards; // ! belum diganti extern
-    const long long winningScore = 1LL << 10;
+    const long long winningScore = 1LL << 32;
     long long rewardPoint = 64;
     AbilityHolder abilityHolder;
     Turn turn;
@@ -182,10 +182,6 @@ public:
             }
         }else{
             tableCards.drawCard();
-            for(Player* player : players){ // ? naroh ke deck, ambil lagi
-                player->reset();
-                player->takeCards();
-            }
         }
         
         if(round == 2){
@@ -208,7 +204,7 @@ public:
         int lastRound = 0;
         while(highestScore() < winningScore){
             if(turn.getRound() != lastRound){
-                if(lastRound != 0){ // cek kalo ganti round, dan bukan ronde awal banget (ronde 1 game 1)
+                if(lastRound == 6){ // cek kalo ganti round, dan bukan ronde awal banget (ronde 1 game 1)
                     checkWinner();
                 }
                 lastRound = turn.getRound();
