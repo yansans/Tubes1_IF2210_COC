@@ -8,7 +8,7 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
     vector<Card> cards;
     vector<int> highest_combos(players.size(), 0);
     vector<double> draw_value;
-    Player* winner = nullptr;
+    Player* winner = players[0];
 
     for (int i = 0; i < players.size(); i++){
         cards.push_back(players[i]->getCards().getLeftCard());
@@ -57,7 +57,6 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
         winner = players[highest_combos[highest]];
     }
 
-
     return winner;
 }
 
@@ -65,8 +64,8 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
 void PlayerCombo::debug_print(vector<Combo> combos, vector<Player*> players){
     cout << endl;
     cout << "debug PlayerCombo" << endl;
-    for (int i = 0; i < combos.size(); i++){
-        cout << "Player " << players[i]->getName() << " " << combos[i] << endl;
-    }
+    // for (int i = 0; i < combos.size(); i++){
+    //     cout << "Player " << players[i]->getName() << " " << combos[i] << endl;
+    // }
     cout << endl;
 }
