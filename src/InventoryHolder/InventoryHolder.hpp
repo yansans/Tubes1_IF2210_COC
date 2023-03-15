@@ -9,7 +9,7 @@
 template<class T>
 class InventoryHolder
 {
-private:
+protected:
     std::vector<T> cards;
     const int limit;
 
@@ -61,26 +61,6 @@ public:
     friend InventoryHolder &operator-=(InventoryHolder &inventory, T card){
         inventory.removeCard(card);
         return inventory;
-    }
-    friend std::istream &operator>>(std::istream &is, InventoryHolder &inventory)
-    { // format : <color> <number>
-        // ! masih bisa duplikat
-        // if (inventory.getSize() == inventory.limit)
-        //     throw InvalidFileInputAmountException();
-        // std::string color;
-        // int number;
-        // if (!(is >> color))
-        //     throw InvalidFileInputNamingFormatException();
-        // if (!(is >> number))
-        //     throw InvalidFileInputNamingFormatException();
-        // std::vector<std::string> validColor = {"hijau", "biru", "kuning", "merah"};
-        // if (find(validColor.begin(), validColor.end(), color) == validColor.end())
-        //     throw InvalidFileInputNamingFormatException();
-        // if (number < 1 || number > 13)
-        //     throw InvalidFileInputNamingFormatException();
-        // T card(number, color);
-        // inventory.insertCard(card);
-        return is;
     }
     void displayCard();
     void clear() {

@@ -8,6 +8,7 @@ class DeckCards : public InventoryHolder<Card>{
 public:
     DeckCards();
     DeckCards(std::string);
+    friend std::istream &operator>>(std::istream &is, DeckCards &inventory);
 };
 
 
