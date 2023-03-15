@@ -5,7 +5,7 @@
 #include "DeckCards.hpp"
 #include "../Storage/DeckStorage.hpp"
 
-class TableCards : public InventoryHolder{
+class TableCards : public InventoryHolder<Card>{
 public:
     TableCards();
     void drawCard();
