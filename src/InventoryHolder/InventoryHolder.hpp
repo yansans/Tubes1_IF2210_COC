@@ -10,61 +10,61 @@ template<class T>
 class InventoryHolder
 {
 protected:
-    std::vector<T> cards;
+    std::vector<T> items;
     const int limit;
 
 public:
     InventoryHolder(int lim): limit(lim) {}
     InventoryHolder(const InventoryHolder &inventory): limit(inventory.limit) {
-        this->cards = inventory.cards;
+        this->items = inventory.items;
     }
     ~InventoryHolder() {}
     InventoryHolder& operator=(const InventoryHolder &inventory){
-        this->cards = inventory.cards;
+        this->items = inventory.items;
         return *this;
     }
-    void insertCard(T card) {
-        if (cards.size() == limit)
+    void insertItem(T item) {
+        if (items.size() == limit)
             throw InventoryFullException();
-        cards.push_back(card);
+        items.push_back(item);
     }
-    void removeCard(T card) {
-        typename std::vector<T>::iterator it = std::find(cards.begin(), cards.end(), card);
-        if (it == cards.end())
-            throw InventoryCardNotFoundException();
-        cards.erase(it);
+    void removeItem(T item) {
+        typename std::vector<T>::iterator it = std::find(items.begin(), items.end(), item);
+        if (it == items.end())
+            throw InventoryItemNotFoundException();
+        items.erase(it);
     }
     T getItem(int idx) {
-        if (idx >= cards.size())
+        if (idx >= items.size())
             throw InventoryOutOfBoundException();
-        return cards[idx];
+        return items[idx];
     }
     int getSize() {
-        return cards.size();
+        return items.size();
     }
-    friend InventoryHolder operator+(InventoryHolder &inventory, T card)
+    friend InventoryHolder operator+(InventoryHolder &inventory, T item)
     {
         InventoryHolder newInventory(inventory);
-        newInventory.insertCard(card);
+        newInventory.insertItem(item);
         return newInventory;
     }
-    friend InventoryHolder operator-(InventoryHolder &inventory, T card)
+    friend InventoryHolder operator-(InventoryHolder &inventory, T item)
     {
         InventoryHolder newInventory(inventory);
-        newInventory.removeCard(card);
+        newInventory.removeItem(item);
         return newInventory;
     }
-    friend InventoryHolder &operator+=(InventoryHolder &inventory, T card){
-        inventory.insertCard(card);
+    friend InventoryHolder &operator+=(InventoryHolder &inventory, T item){
+        inventory.insertItem(item);
         return inventory;
     }
-    friend InventoryHolder &operator-=(InventoryHolder &inventory, T card){
-        inventory.removeCard(card);
+    friend InventoryHolder &operator-=(InventoryHolder &inventory, T item){
+        inventory.removeItem(item);
         return inventory;
     }
-    void displayCard();
+    void displayItem();
     void clear() {
-        cards.clear();
+        items.clear();
     }
 };
 

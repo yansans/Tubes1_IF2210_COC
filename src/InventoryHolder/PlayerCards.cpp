@@ -26,17 +26,17 @@ void PlayerCards::displayCard()
 void PlayerCards::setLeftCard(Card card)
 {
     if(getSize() == 0){
-        this->insertCard(card);
+        this->insertItem(card);
     }
     else if(getSize() == 1){
-        this->removeCard(this->getItem(0));
-        this->insertCard(card);
+        this->removeItem(this->getItem(0));
+        this->insertItem(card);
     }else{
         Card right = this->getItem(1);
-        this->removeCard(this->getItem(1));
-        this->removeCard(this->getItem(0));
-        this->insertCard(card);
-        this->insertCard(right);
+        this->removeItem(this->getItem(1));
+        this->removeItem(this->getItem(0));
+        this->insertItem(card);
+        this->insertItem(right);
     }
 }
 
@@ -46,9 +46,9 @@ void PlayerCards::setRightCard(Card card)
         throw InventoryOutOfBoundException();
     }
     else if(getSize() == 1){
-        this->insertCard(card);
+        this->insertItem(card);
     }else{
-        this->removeCard(this->getItem(1));
-        this->insertCard(card);
+        this->removeItem(this->getItem(1));
+        this->insertItem(card);
     }
 }

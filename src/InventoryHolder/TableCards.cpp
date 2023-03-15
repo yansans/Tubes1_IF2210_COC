@@ -5,7 +5,7 @@ TableCards::TableCards()
     
 void TableCards::drawCard()
 {
-    insertCard(Deck.getItem(0));
+    insertItem(Deck.getItem(0));
     Deck -= Deck.getItem(0);
 
 }

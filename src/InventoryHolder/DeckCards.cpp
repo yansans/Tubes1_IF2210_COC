@@ -20,7 +20,7 @@ DeckCards::DeckCards()
 
     std::shuffle(cards.begin(), cards.end(), std::mt19937_64(std::chrono::steady_clock::now().time_since_epoch().count()));
     for(int i=0;i<52;i++){
-        insertCard(cards[i]);
+        insertItem(cards[i]);
     }
 }
 
@@ -38,7 +38,7 @@ DeckCards::DeckCards(std::string fileName)
         if(std::find(validColor.begin(), validColor.end(), color) == validColor.end())throw InvalidFileInputNamingFormatException();
         if(number < 1 || number > 13)throw InvalidFileInputNamingFormatException();
         Card card(number, color);
-        insertCard(card);
+        insertItem(card);
     }
     if(fin >> color)throw InvalidFileInputAmountException();
 }
@@ -60,6 +60,6 @@ std::istream &operator>>(std::istream &is, DeckCards &inventory)
     if (number < 1 || number > 13)
         throw InvalidFileInputNamingFormatException();
     Card card(number, color);
-    inventory.insertCard(card);
+    inventory.insertItem(card);
     return is;
 }

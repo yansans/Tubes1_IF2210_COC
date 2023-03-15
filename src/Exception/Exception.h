@@ -6,13 +6,13 @@ using namespace std;
 
 struct InventoryFullException : public exception {
     const char* what() const throw() {
-        return "Can't insert card, Inventory is full";
+        return "Can't insert item, Inventory is full";
     }
 };
 
-struct InventoryCardNotFoundException : public exception {
+struct InventoryItemNotFoundException : public exception {
     const char* what() const throw() {
-        return "Can't remove card, card not found in inventory";
+        return "Can't remove item, item not found in inventory";
     }
 };
 
