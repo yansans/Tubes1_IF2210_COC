@@ -1,22 +1,26 @@
 #include "PlayerCombo.hpp"
+#include <iostream> 
+
+using namespace std;
 
 Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
     vector<Combo> combos;
     vector<Card> cards;
-    vector<int> highest_combos;
+    vector<int> highest_combos(players.size(), 0);
     vector<double> draw_value;
     Player* winner = nullptr;
 
     for (int i = 0; i < players.size(); i++){
         cards.push_back(players[i]->getCards().getLeftCard());
         cards.push_back(players[i]->getCards().getRightCard());
-        // ! check getter TableCards
         for (int j = 0; j < table.getSize(); j++){
             cards.push_back(table.getItem(j));
         }
         combos.push_back(Combo(cards));
         cards.clear();
     }
+
+    debug_print(combos);
 
     auto highest = 0;
     highest_combos.push_back(highest);
@@ -47,4 +51,14 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
 
 
     return winner;
+}
+
+
+void PlayerCombo::debug_print(vector<Combo> combos){
+    cout << endl;
+    cout << "debug PlayerCombo" << endl;
+    for (int i = 0; i < combos.size(); i++){
+        cout << "Player ke-" << i + 1 << " " << combos[i] << endl;
+    }
+    cout << endl;
 }
