@@ -68,15 +68,6 @@ T maxElement(const T *itrBegin, const T *itrEnd) {
     return maxEl;
 }
 
-/**
- * @brief return max element in a vector
- * 
- * @tparam P 
- * @tparam T 
- * @param vec 
- * @param lambda atribute to be compared
- * @return T 
- */
 template<class P, class T>
 T maxElement(const vector<T> &vec, std::function<P(T)> &lambda) {
     if (vec.size() == 0) throw EmptyContainerException();
@@ -87,6 +78,16 @@ T maxElement(const vector<T> &vec, std::function<P(T)> &lambda) {
         }
     }
     return maxEl;
+}
+
+template<class T>
+void sortPointer(vector<T*> &vec) {
+    sort(vec.begin(), vec.end(), [](T *a, T *b) { return a < b; });
+}
+
+template<class T>
+T* maxPointer(const vector<T*> &vec) {
+    return maxElement(vec, [](T *a) { return *a; });
 }
 
 /**
