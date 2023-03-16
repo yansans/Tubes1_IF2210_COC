@@ -6,7 +6,6 @@
 #include "../Util/util.hpp"
 #include <vector>
 #include <algorithm>
-#include <numeric>
 
 
 class BlackjackCombo: public Values {
