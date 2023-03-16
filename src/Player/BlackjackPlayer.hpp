@@ -1,25 +1,16 @@
 #ifndef __BLACKJACKPLAYER_HPP__
 #define __BLACKJACKPLAYER_HPP__
 
-#include <string>
-#include "../InventoryHolder/BlackjackPlayerCards.hpp"
+#include "BlackjackParticipant.hpp"
 
-class BlackjackPlayer {
+class BlackjackPlayer: public BlackjackParticipant {
     private:
-    std::string name;
-    BlackjackPlayerCards cards;
-
+    static int namedPlayerCount;
     public:
-    BlackjackPlayer();
-    void getInitialCards(BlackjackDeckCards &deck);
-    void playTurn(BlackjackDeckCards &deck);
-    void playBot(BlackjackDeckCards &deck);
     void askForName();
-    void setName(std::string name);
-    int score();
+    void playTurn(BlackjackDeckCards &deck);
 
-    void printInfo();
-    void printInfoDealer(int hiddenCnt = 1);
+    void printInfo(int hideCnt = 0);
 };
 
 #endif

@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <functional>
+#include <string>
+#include <iostream>
 #include "../Exception/Exception.h"
 
 
@@ -109,5 +111,6 @@ Ret sumElement(const std::vector<T> &vec, std::function<Ret(T)> &lambda) {
     }
     return sum;
 }
+
 
 #endif
