@@ -1,5 +1,5 @@
-#include "GameMaster/KerajaanPermen.cpp"
-#include "./InventoryHolder/DeckCards.hpp"
+#include "GameMaster/KerajaanPermen.hpp"
+#include "InventoryHolder/DeckCards.hpp"
 
 DeckCards Deck;
 int main()

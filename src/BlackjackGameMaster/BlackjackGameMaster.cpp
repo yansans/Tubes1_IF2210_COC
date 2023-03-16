@@ -3,7 +3,6 @@
 #include "../Util/util.hpp"
 #include <iostream>
 #include <algorithm>
-#include <functional>
 #include <random>
 #include <string>
 #include <chrono>
