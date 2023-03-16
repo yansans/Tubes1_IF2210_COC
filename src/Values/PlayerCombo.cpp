@@ -21,7 +21,7 @@ Player* PlayerCombo::get_winner(vector<Player*> players, TableCards table){
     }
 
     // ! debug print
-    debug_print(combos, players);
+    // debug_print(combos, players);
 
     auto highest = 0;
     highest_combos.push_back(highest);
