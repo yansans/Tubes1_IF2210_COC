@@ -218,10 +218,9 @@ void KerajaanPermen::gameLoop(){
 }
 
 void KerajaanPermen::playGame(){
-        inputPlayers();
-        gameLoop();
-        displayEndGame();
-        // ! tanya mau ngulang
-    }
+    inputPlayers();
+    gameLoop();
+    displayEndGame();
+}
 
 
