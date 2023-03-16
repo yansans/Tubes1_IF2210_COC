@@ -25,6 +25,7 @@ run: compile
 
 compile:
 	@echo Compiling...
+	@mkdir $(OUTPUT_FOLDER) -p
 	@$(CXX) $(CPPFLAGS) $(SRC) $(MAIN) -o $(OUTPUT_FOLDER)/$(EXECUTABLE)
 	@echo Compilation Done!
 
