@@ -25,6 +25,7 @@ public:
     PlayerCards getCards();
     void setCards(PlayerCards);
     void reset();
+    void displayCard();
     bool operator==(const Player &other);
     bool operator<(const Player &other);
     bool operator>(const Player &other);

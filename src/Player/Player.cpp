@@ -57,6 +57,13 @@ void Player::reset()
         this->cards -= this->cards.getItem(0);
     }
 }
+
+void Player::displayCard()
+{
+    cout << "Kartu " << getName() << ": "
+            << getCards().getLeftCard() << " && " << getCards().getRightCard()
+            << endl;
+}
 bool Player::operator==(const Player &other)
 {
     return this->getPoint() == other.getPoint();

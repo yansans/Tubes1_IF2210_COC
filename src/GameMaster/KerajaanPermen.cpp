@@ -106,11 +106,8 @@ void KerajaanPermen::playerOptionInput(Player& player){
 
     try{CommandList::execute(input, rewardPoint, player.getName());}
     catch(InvalidCommand e){
-        try{
-            abilityHolder.executeAbility(input, &player, rewardPoint, players, Deck, turn);
-        }catch(InvalidCommand e){
-            throw InvalidOptionInputException();
-        }
+        try{abilityHolder.executeAbility(input, &player, rewardPoint, players, Deck, turn);}
+        catch(InvalidCommand e){throw InvalidOptionInputException();}
     }
 }
 
@@ -183,16 +180,9 @@ void KerajaanPermen::checkWinner(){
     Player* winner = PlayerCombo::get_winner(players, tableCards);
     winner->addPoint(rewardPoint);
 
-    cout << "Kartu meja: ";
-    for(int i=0;i<tableCards.getSize()-1;i++){
-        cout << tableCards.getItem(i) << " && ";
-    }
-    if(tableCards.getSize() != 0)cout << tableCards.getItem(tableCards.getSize() - 1);
-    cout << endl;
+    tableCards.displayCard();
     for(Player* player : players){
-        cout << "Kartu " << player->getName() << ": "
-                << player->getCards().getLeftCard() << " && " << player->getCards().getRightCard()
-                << endl;
+        player->displayCard();
     }
     printf("%s menang, dan mendapat poin sebanyak : %lld\n\n", winner->getName().c_str(), rewardPoint);
 }
