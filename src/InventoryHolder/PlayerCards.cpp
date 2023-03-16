@@ -2,7 +2,7 @@
 #include "../Exception/Exception.h"
 
 PlayerCards::PlayerCards()
-    : InventoryHolder(2) { }
+    : InventoryHolder(2) {}
 
 Card PlayerCards::getLeftCard()
 {
@@ -25,13 +25,17 @@ void PlayerCards::displayCard()
 
 void PlayerCards::setLeftCard(Card card)
 {
-    if(getSize() == 0){
+    if (getSize() == 0)
+    {
         this->insertItem(card);
     }
-    else if(getSize() == 1){
+    else if (getSize() == 1)
+    {
         this->removeItem(this->getItem(0));
         this->insertItem(card);
-    }else{
+    }
+    else
+    {
         Card right = this->getItem(1);
         this->removeItem(this->getItem(1));
         this->removeItem(this->getItem(0));
@@ -42,12 +46,16 @@ void PlayerCards::setLeftCard(Card card)
 
 void PlayerCards::setRightCard(Card card)
 {
-    if(getSize() == 0){
+    if (getSize() == 0)
+    {
         throw InventoryOutOfBoundException();
     }
-    else if(getSize() == 1){
+    else if (getSize() == 1)
+    {
         this->insertItem(card);
-    }else{
+    }
+    else
+    {
         this->removeItem(this->getItem(1));
         this->insertItem(card);
     }

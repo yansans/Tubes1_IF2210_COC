@@ -1,37 +1,39 @@
-# ifndef ABILITY_HOLDER
-# define ABILITY_HOLDER
+#ifndef ABILITY_HOLDER
+#define ABILITY_HOLDER
 
-# include <map>
+#include <map>
 
-# include "../Ability/Ability.hpp"
-# include "../Ability/Abilityless.hpp"
-# include "../Ability/Quadruple.hpp"
-# include "../Ability/Quarter.hpp"
-# include "../Ability/ReRoll.hpp"
-# include "../Ability/Reverse.hpp"
-# include "../Ability/Swap.hpp"
-# include "../Ability/Switch.hpp"
-# include "../Exception/Exception.h"
+#include "../Ability/Ability.hpp"
+#include "../Ability/Abilityless.hpp"
+#include "../Ability/Quadruple.hpp"
+#include "../Ability/Quarter.hpp"
+#include "../Ability/ReRoll.hpp"
+#include "../Ability/Reverse.hpp"
+#include "../Ability/Swap.hpp"
+#include "../Ability/Switch.hpp"
+#include "../Exception/Exception.h"
 
-class AbilityHolder {
-    private:
-        map<Player*, Ability*> playerAbility;
-    public:
-        AbilityHolder();
-        AbilityHolder(vector<Player*>&);
-        ~AbilityHolder();
+class AbilityHolder
+{
+private:
+    map<Player *, Ability *> playerAbility;
 
-        void addAbility(Player*, Ability*);
-        void removeAbility(Player*); // Remove the ability from a player
+public:
+    AbilityHolder();
+    AbilityHolder(vector<Player *> &);
+    ~AbilityHolder();
 
-        bool playerHasAbility(Player*, Ability*); // Check if the player has the given ability
+    void addAbility(Player *, Ability *);
+    void removeAbility(Player *); // Remove the ability from a player
 
-        Ability* checkPlayerAbility(Player*);
-        Player* checkAbilityOwner(Ability*); // Who the given ability belongs to
+    bool playerHasAbility(Player *, Ability *); // Check if the player has the given ability
 
-        bool abilityCommandIsTrue(string abilityCommand);
+    Ability *checkPlayerAbility(Player *);
+    Player *checkAbilityOwner(Ability *); // Who the given ability belongs to
 
-        void executeAbility(string abilityString, Player*, long long& pts, vector<Player*>, DeckCards&, Turn&);
+    bool abilityCommandIsTrue(string abilityCommand);
+
+    void executeAbility(string abilityString, Player *, long long &pts, vector<Player *>, DeckCards &, Turn &);
 };
 
-# endif
+#endif

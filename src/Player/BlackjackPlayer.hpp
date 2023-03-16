@@ -3,10 +3,12 @@
 
 #include "BlackjackParticipant.hpp"
 
-class BlackjackPlayer: public BlackjackParticipant {
-    private:
+class BlackjackPlayer : public BlackjackParticipant
+{
+private:
     static int namedPlayerCount;
-    public:
+
+public:
     void askForName();
     void playTurn(BlackjackDeckCards &deck);
 

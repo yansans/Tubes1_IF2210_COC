@@ -3,7 +3,8 @@
 
 #include "InventoryHolder.hpp"
 
-class PlayerCards : public InventoryHolder<Card>{
+class PlayerCards : public InventoryHolder<Card>
+{
 public:
     PlayerCards();
     Card getLeftCard();

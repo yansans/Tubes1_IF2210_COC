@@ -51,7 +51,7 @@ void Player::setCards(PlayerCards cards)
 void Player::reset()
 {
     this->setDone(false);
-    while(this->cards.getSize() != 0)
+    while (this->cards.getSize() != 0)
     {
         Deck += this->cards.getItem(0);
         this->cards -= this->cards.getItem(0);
@@ -61,8 +61,8 @@ void Player::reset()
 void Player::displayCard()
 {
     cout << "Kartu " << getName() << ": "
-            << getCards().getLeftCard() << " && " << getCards().getRightCard()
-            << endl;
+         << getCards().getLeftCard() << " && " << getCards().getRightCard()
+         << endl;
 }
 bool Player::operator==(const Player &other)
 {

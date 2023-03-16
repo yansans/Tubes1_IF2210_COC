@@ -13,16 +13,21 @@ void BlackjackParticipant::getInitialCards(BlackjackDeckCards &deck)
 
 void BlackjackParticipant::playTurn(BlackjackDeckCards &deck)
 {
-    auto printCommands = []() {
+    auto printCommands = []()
+    {
         std::cout << "Commands:" << std::endl
                   << "- hit (ambil satu kartu)" << std::endl
                   << "- stand (stop mengambil kartu)" << std::endl;
     };
-    auto printSplitCommand = []() {
+    auto printSplitCommand = []()
+    {
         std::cout << "- split (buang dan ambil satu kartu; ditawarkan jika kedua kartu di tangan bernilai sama)" << std::endl;
     };
-    auto lower = [](std::string &s) {
-        for (char &c: s) if ('A' <= c && c <= 'Z') c = c + 32;
+    auto lower = [](std::string &s)
+    {
+        for (char &c : s)
+            if ('A' <= c && c <= 'Z')
+                c = c + 32;
     };
 
     std::cout << "=======================" << std::endl
@@ -30,48 +35,61 @@ void BlackjackParticipant::playTurn(BlackjackDeckCards &deck)
               << "=======================" << std::endl;
 
     std::string playerCommand;
-    while(true) {
-        try {
+    while (true)
+    {
+        try
+        {
             std::cout << cards << std::endl;
             printCommands();
-            if (this->cards.canSplit()) {
+            if (this->cards.canSplit())
+            {
                 printSplitCommand();
             }
             std::cout << "Perintah anda: ";
             std::getline(std::cin, playerCommand);
             lower(playerCommand);
 
-            if (playerCommand == "hit") {
+            if (playerCommand == "hit")
+            {
                 std::cout << "Anda mendapat kartu " << deck.getTop() << std::endl;
                 this->cards << deck;
             }
-            else if (playerCommand == "stand") {
+            else if (playerCommand == "stand")
+            {
                 std::cout << "Giliran dilanjutkan" << std::endl;
                 break;
             }
-            else if (playerCommand == "split") {
-                if (this->cards.canSplit()) {
+            else if (playerCommand == "split")
+            {
+                if (this->cards.canSplit())
+                {
                     deck << this->cards;
                     std::cout << "Anda melakukan split dan mendapat kartu " << deck.getTop() << std::endl;
                     this->cards << deck;
                 }
-                else throw InvalidCommand();
+                else
+                    throw InvalidCommand();
             }
-            else throw InvalidCommand();
+            else
+                throw InvalidCommand();
 
-            if (this->cards.isBust()) {
+            if (this->cards.isBust())
+            {
                 std::cout << "Anda kalah dari permainan karena skor = " << this->cards.value() << std::endl;
                 break;
             }
-            else if (this->cards.isBlackjack()) {
+            else if (this->cards.isBlackjack())
+            {
                 std::cout << "Selamat! Anda mendapatkan blackjack (skor 21)" << std::endl;
                 break;
             }
         }
-        catch (InvalidCommand e) {
+        catch (InvalidCommand e)
+        {
             std::cout << "Invalid command!" << std::endl;
         }
-        catch (exception &e) {
+        catch (exception &e)
+        {
             std::cout << e.what() << std::endl;
         }
         std::cout << std::endl;
@@ -91,7 +109,8 @@ void BlackjackParticipant::setName(std::string name)
 
 int BlackjackParticipant::score()
 {
-    if (this->cards.isBust()) return -1;
+    if (this->cards.isBust())
+        return -1;
     return this->cards.value();
 }
 
@@ -99,5 +118,3 @@ bool BlackjackParticipant::operator<(BlackjackParticipant &o)
 {
     return this->score() < o.score();
 }
-
-

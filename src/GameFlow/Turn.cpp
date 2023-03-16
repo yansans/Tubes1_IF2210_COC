@@ -18,11 +18,10 @@ void Turn::nextTurn()
     if (players[this->curTurn]->isDone())
     {
         this->nextRound(players);
-        Player* firstPlayer = players[0];
+        Player *firstPlayer = players[0];
         players.erase(players.begin());
         players.push_back(firstPlayer);
         this->firstTurn = this->curTurn = 0;
-        // this->firstTurn = this->curTurn = (this->firstTurn + 1) % 7;
     }
     this->curPlayer = players[this->curTurn];
 }

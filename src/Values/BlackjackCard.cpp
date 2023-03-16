@@ -13,15 +13,13 @@ std::map<std::string, int> BlackjackCard::valuemap = {
     {"J", 10},
     {"Q", 10},
     {"K", 10},
-    {"A", 11}
-};
+    {"A", 11}};
 
 std::vector<std::string> BlackjackCard::suitList = {
     "club",
     "heart",
     "spade",
-    "diamond"
-};
+    "diamond"};
 
 double BlackjackCard::get_value() const
 {
@@ -33,11 +31,10 @@ bool BlackjackCard::operator==(const BlackjackCard &o)
     return this->suit == o.suit && this->value == o.value;
 }
 
-std::ostream& operator<<(std::ostream& out, BlackjackCard c)
+std::ostream &operator<<(std::ostream &out, BlackjackCard c)
 {
     out << c.value << " " << c.suit;
     return out;
 }
 
-BlackjackCard::BlackjackCard(std::string suit, std::string value):
-    suit(suit), value(value) {}
+BlackjackCard::BlackjackCard(std::string suit, std::string value) : suit(suit), value(value) {}

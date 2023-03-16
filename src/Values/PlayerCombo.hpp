@@ -10,13 +10,13 @@
 
 using namespace std;
 
-class PlayerCombo{
-    private:
-    static void debug_print(vector<Combo> combos, vector<Player*> players);
+class PlayerCombo
+{
+private:
+    static void debug_print(vector<Combo> combos, vector<Player *> players);
 
-    public:
-    static Player* get_winner(vector<Player*> players, TableCards table);
-
+public:
+    static Player *get_winner(vector<Player *> players, TableCards table);
 };
 
 #endif

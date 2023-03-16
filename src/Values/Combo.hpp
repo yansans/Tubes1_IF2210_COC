@@ -7,27 +7,28 @@
 
 using namespace std;
 
-class Combo: public Values{
-    private:
-    vector<Card> cards;    
+class Combo : public Values
+{
+private:
+    vector<Card> cards;
     pair<bool, Card> number_check(vector<Card> _cards, int req, int loop, vector<int> duplicates = {}) const;
 
-    pair<bool,Card> straightflush_check() const;
-    pair<bool,Card> fourkind_check() const;
-    pair<bool, pair<Card,Card>> fullhouse_check() const;
-    pair<bool,Card> flush_check() const;
-    pair<bool,Card> straight_check() const;
-    pair<bool,Card> threekind_check(vector<int> duplicate = {}) const;
-    pair<bool, pair<Card,Card>> twopair_check(vector<int> duplicate = {}) const;
-    pair<bool,Card> pair_check(vector<int> duplicate = {}) const;
+    pair<bool, Card> straightflush_check() const;
+    pair<bool, Card> fourkind_check() const;
+    pair<bool, pair<Card, Card>> fullhouse_check() const;
+    pair<bool, Card> flush_check() const;
+    pair<bool, Card> straight_check() const;
+    pair<bool, Card> threekind_check(vector<int> duplicate = {}) const;
+    pair<bool, pair<Card, Card>> twopair_check(vector<int> duplicate = {}) const;
+    pair<bool, Card> pair_check(vector<int> duplicate = {}) const;
 
     Card get_straightflush() const;
     Card get_fourkind() const;
-    pair<Card,Card> get_fullhouse() const;
+    pair<Card, Card> get_fullhouse() const;
     Card get_flush() const;
     Card get_straight() const;
     Card get_threekind(vector<int> duplicate = {}) const;
-    pair<Card,Card> get_twopair() const;
+    pair<Card, Card> get_twopair() const;
     Card get_pair(vector<int> duplicate = {}) const;
     Card get_highcard(vector<int> duplicates = {}) const;
 
@@ -43,21 +44,20 @@ class Combo: public Values{
 
     double highcard_value(vector<int> duplicates = {}) const;
     double pair_value(vector<int> duplicatate = {}) const;
-    double twopair_value()const;
-    double threekind_value(vector<int> duplicate = {})const;
-    double straight_value()const;
-    double flush_value()const;
-    double fullhouse_value()const;
-    double fourkind_value()const;
-    double straightflush_value()const;
+    double twopair_value() const;
+    double threekind_value(vector<int> duplicate = {}) const;
+    double straight_value() const;
+    double flush_value() const;
+    double fullhouse_value() const;
+    double fourkind_value() const;
+    double straightflush_value() const;
 
-    vector<Card> remove_duplicate(vector<Card> ordered_cards ,int duplicates = 0) const;
+    vector<Card> remove_duplicate(vector<Card> ordered_cards, int duplicates = 0) const;
 
-    public:
-
+public:
     Combo(const vector<Card>);
 
-    Combo& operator=(const Combo &other);
+    Combo &operator=(const Combo &other);
 
     ~Combo();
 
@@ -65,7 +65,7 @@ class Combo: public Values{
 
     int get_combo_type() const;
 
-    template<typename T>
+    template <typename T>
     T get_combo_card() const;
 
     bool operator<(const Combo &other) const;
@@ -82,8 +82,8 @@ class Combo: public Values{
 
     friend void printCards(vector<Card> cards);
 
-    friend ostream& operator<< (ostream& os, Combo c);
-}; 
+    friend ostream &operator<<(ostream &os, Combo c);
+};
 
 void printCards(vector<Card> cards);
 

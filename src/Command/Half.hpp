@@ -3,12 +3,13 @@
 
 #include "Command.hpp"
 
-class Half: public Command {
-    public:
+class Half : public Command
+{
+public:
     /**
      * @brief Half point and output msg.
-     * 
-     * @param pts 
+     *
+     * @param pts
      * @param name player name
      */
     void execute(long long &pts, std::string name) override;
