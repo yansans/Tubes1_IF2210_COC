@@ -17,13 +17,14 @@ void Reverse::executeAbility(Player* player, long long& pts, vector<Player*> pla
 
     vector<Player*> playersInTurn = turn.getPlayers();
     int curTurn = turn.getCurrentTurn();
-    for(int i = curTurn; i < playersInTurn.size(); i++) {
+    for(int i = curTurn+1; i < playersInTurn.size(); i++) {
         cout << playersInTurn[i]->getName() << ' '; 
     }
     cout << endl;
-    for(int i = 0; i < playersInTurn.size(); i++) {
+    cout << "urutan eksekusi giliran selanjutnya :";
+    for(int i = 1; i < playersInTurn.size(); i++) {
         cout <<playersInTurn[i]->getName() << ' ';
     }
-    cout << endl;
+    cout << playersInTurn[0]->getName() << endl;
     cout << "Kamu masih dapat melakukan perintah!" << endl;
 }
