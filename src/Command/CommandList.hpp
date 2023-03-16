@@ -9,15 +9,16 @@
 #include "Next.hpp"
 #include "../Exception/Exception.h"
 
-class CommandList {
-    private:
-    static std::map<std::string, Command*> cmdList;
+class CommandList
+{
+private:
+    static std::map<std::string, Command *> cmdList;
 
-    public:
+public:
     /**
      * @brief execute command
      * @exception InvalidCommand
-     * 
+     *
      * @param commandString string command, case insensitive
      * @param points current game points to be changed
      * @param name

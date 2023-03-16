@@ -8,17 +8,17 @@
 #include <algorithm>
 #include <numeric>
 
-
-class BlackjackCombo: public Values {
-    private:
+class BlackjackCombo : public Values
+{
+private:
     std::vector<BlackjackCard> cards;
     int ace_count() const;
-    
-    public:
+
+public:
     BlackjackCombo(const std::vector<BlackjackCard> &inven);
     /**
      * @brief return value nearest to 21 (lower if possible)
-     * 
+     *
      * @return value of BlackjackCombo
      */
     double get_value() const;

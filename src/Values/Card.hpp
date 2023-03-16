@@ -8,8 +8,9 @@
 
 using namespace std;
 
-class Card: public Values{
-    private:
+class Card : public Values
+{
+private:
     int number;
     string colour;
     double val;
@@ -17,23 +18,23 @@ class Card: public Values{
     double colour_value(string) const;
     double number_value(int) const;
 
-    public:
+public:
     Card();
     Card(int, string);
-    Card(const Card& c);
-    Card& operator= (const Card& c);
+    Card(const Card &c);
+    Card &operator=(const Card &c);
     ~Card();
 
     int get_number() const;
     string get_colour() const;
 
-    friend bool operator== (const Card& c1, const Card& c2);
+    friend bool operator==(const Card &c1, const Card &c2);
 
-    friend bool operator< (const Card& c1,  const Card& c2);
+    friend bool operator<(const Card &c1, const Card &c2);
 
-    friend bool operator> (Card& c1,  Card& c2);
+    friend bool operator>(Card &c1, Card &c2);
 
-    friend ostream& operator<< (ostream& os, const Card& c);
+    friend ostream &operator<<(ostream &os, const Card &c);
 
     double get_value() const override;
 };

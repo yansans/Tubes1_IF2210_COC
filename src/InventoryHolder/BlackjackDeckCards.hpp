@@ -9,28 +9,28 @@
 #include <vector>
 #include <map>
 
-class BlackjackDeckCards: public InventoryHolder<BlackjackCard> {
-    public:
+class BlackjackDeckCards : public InventoryHolder<BlackjackCard>
+{
+public:
     /**
-     * @brief Construct a random Blackjack Deck Cards 
-     * 
+     * @brief Construct a random Blackjack Deck Cards
+     *
      */
     BlackjackDeckCards();
 
     /**
      * @brief Get the Top card in deck.
-     * 
-     * @return BlackjackCard 
+     *
+     * @return BlackjackCard
      */
     BlackjackCard getTop();
     /**
      * @brief Delete top card in deck
-     * 
+     *
      */
     void pop();
-    
-    void shuffle();
 
+    void shuffle();
 };
 
 #endif

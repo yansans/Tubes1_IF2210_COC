@@ -11,5 +11,4 @@ int Game::getGame() const
 void Game::nextGame()
 {
     this->gameCount++;
-
 }

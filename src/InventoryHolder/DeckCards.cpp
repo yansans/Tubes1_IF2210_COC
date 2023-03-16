@@ -8,34 +8,39 @@
 #include <chrono>
 #include <set>
 
-
 DeckCards::DeckCards()
-    : InventoryHolder(52) {
+    : InventoryHolder(52)
+{
     std::string validColor[] = {"hijau", "biru", "kuning", "merah"};
     std::vector<Card> cards;
-    for(std::string color : validColor){
-        for(int i=1;i<=13;i++){
+    for (std::string color : validColor)
+    {
+        for (int i = 1; i <= 13; i++)
+        {
             cards.push_back(Card(i, color));
         }
     }
 
     std::shuffle(cards.begin(), cards.end(), std::mt19937_64(std::chrono::steady_clock::now().time_since_epoch().count()));
-    for(int i=0;i<52;i++){
+    for (int i = 0; i < 52; i++)
+    {
         insertItem(cards[i]);
     }
 }
 
 DeckCards::DeckCards(std::string fileName)
-    : InventoryHolder(52) {
+    : InventoryHolder(52)
+{
     std::ifstream fin(fileName);
     std::string color;
     int number;
     std::vector<std::string> validColor = {"hijau", "biru", "kuning", "merah"};
 
-    for(int i=0;i<52;i++){
+    for (int i = 0; i < 52; i++)
+    {
         fin >> *this;
     }
-    if(fin >> color)
+    if (fin >> color)
         throw InvalidFileInputAmountException();
     fin.close();
 }
@@ -60,10 +65,12 @@ std::istream &operator>>(std::istream &is, DeckCards &inventory)
 
     Card card(number, color);
     bool alreadyExist = false;
-    for(int i=0;i<inventory.getSize();i++){
-        if(inventory.getItem(i) == card)alreadyExist = true;
+    for (int i = 0; i < inventory.getSize(); i++)
+    {
+        if (inventory.getItem(i) == card)
+            alreadyExist = true;
     }
-    if(alreadyExist)
+    if (alreadyExist)
         throw DuplicateCardException();
     inventory.insertItem(card);
     return is;

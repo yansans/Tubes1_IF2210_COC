@@ -7,8 +7,9 @@
 #include "../Values/BlackjackCombo.hpp"
 #include <iostream>
 
-class BlackjackPlayerCards: InventoryHolder<BlackjackCard> {
-    public:
+class BlackjackPlayerCards : InventoryHolder<BlackjackCard>
+{
+public:
     BlackjackPlayerCards();
     // cctor dan operator= tidak diperlukan
     int value();
@@ -19,25 +20,25 @@ class BlackjackPlayerCards: InventoryHolder<BlackjackCard> {
 
     /**
      * @brief move top of deck to playercards;
-     * 
-     * @param deck 
-     * @return BlackjackPlayerCards& 
+     *
+     * @param deck
+     * @return BlackjackPlayerCards&
      */
-    BlackjackPlayerCards& operator<<(BlackjackDeckCards& deck);
+    BlackjackPlayerCards &operator<<(BlackjackDeckCards &deck);
     /**
      * @brief return card to deck
-     * 
-     * @param deck 
-     * @param playercards 
-     * @return BlackjackDeckCards& 
+     *
+     * @param deck
+     * @param playercards
+     * @return BlackjackDeckCards&
      */
-    friend BlackjackDeckCards& operator<<(BlackjackDeckCards& deck, BlackjackPlayerCards& playercards);
-    
-    friend std::ostream& operator<<(std::ostream& out, BlackjackPlayerCards& playercards);
+    friend BlackjackDeckCards &operator<<(BlackjackDeckCards &deck, BlackjackPlayerCards &playercards);
+
+    friend std::ostream &operator<<(std::ostream &out, BlackjackPlayerCards &playercards);
     /**
      * @brief Output cards; first hiddenCnt cards is hidden.
-     * 
-     * @param hiddenCnt 
+     *
+     * @param hiddenCnt
      */
     void outputHide(int hiddenCnt = 1);
 };

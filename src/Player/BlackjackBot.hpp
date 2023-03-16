@@ -3,12 +3,14 @@
 
 #include "BlackjackParticipant.hpp"
 
-class BlackjackBot: public BlackjackParticipant {
-    private:
+class BlackjackBot : public BlackjackParticipant
+{
+private:
     static int botCount;
-    public:
+
+public:
     BlackjackBot();
-    
+
     void playTurn(BlackjackDeckCards &deck);
     void printInfo(int hideCnt = 1);
 };

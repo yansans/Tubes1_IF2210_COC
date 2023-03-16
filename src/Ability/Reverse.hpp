@@ -1,14 +1,15 @@
-# ifndef REVERSE_HPP
-# define REVERSE_HPP
+#ifndef REVERSE_HPP
+#define REVERSE_HPP
 
-# include "Ability.hpp"
+#include "Ability.hpp"
 
-class Reverse : public Ability {
-    public:
-        Reverse();
-        ~Reverse();
+class Reverse : public Ability
+{
+public:
+    Reverse();
+    ~Reverse();
 
-        void executeAbility(Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>);
+    void executeAbility(Player *, long long &pts, vector<Player *>, DeckCards &, Turn &, map<Player *, Ability *>);
 };
 
-# endif
+#endif

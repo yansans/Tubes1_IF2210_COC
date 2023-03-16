@@ -4,12 +4,13 @@
 #include <string.h>
 #include <iostream>
 
-class Command {
-    public:
+class Command
+{
+public:
     /**
      * @brief Change point and output msg depending on command.
-     * 
-     * @param pts 
+     *
+     * @param pts
      * @param name player name
      */
     virtual void execute(long long &pts, std::string name) = 0;

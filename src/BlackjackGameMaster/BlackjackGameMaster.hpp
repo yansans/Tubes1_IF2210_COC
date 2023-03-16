@@ -9,18 +9,18 @@
 #include "../InventoryHolder/BlackjackPlayerCards.hpp"
 #include "../InventoryHolder/BlackjackDeckCards.hpp"
 
-
-class BlackjackGameMaster {
-    protected:
+class BlackjackGameMaster
+{
+protected:
     std::vector<BlackjackPlayer> player;
     std::vector<BlackjackBot> bot;
-    std::vector<BlackjackParticipant*> participant; 
+    std::vector<BlackjackParticipant *> participant;
 
     BlackjackDeckCards deck;
 
     static const int participantLimit = 8;
 
-    public:
+public:
     void playGame();
 };
 

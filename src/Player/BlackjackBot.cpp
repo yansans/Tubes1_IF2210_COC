@@ -13,11 +13,13 @@ void BlackjackBot::playTurn(BlackjackDeckCards &deck)
     std::cout << "=======================" << std::endl
               << name << "\'s turn" << std::endl
               << "=======================" << std::endl;
-    while (cards.value() < 17) {
+    while (cards.value() < 17)
+    {
         std::cout << "Bot mengambil kartu " << deck.getTop() << std::endl;
         this->cards << deck;
     }
-    std::cout << "Giliran Bot selesai" << std::endl << std::endl;
+    std::cout << "Giliran Bot selesai" << std::endl
+              << std::endl;
 }
 
 void BlackjackBot::printInfo(int hideCnt)

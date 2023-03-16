@@ -1,14 +1,15 @@
-# ifndef QUADRUPLE_HPP
-# define QUADRUPLE_HPP
+#ifndef QUADRUPLE_HPP
+#define QUADRUPLE_HPP
 
-# include "Ability.hpp"
+#include "Ability.hpp"
 
-class Quadruple : public Ability {
-    public:
-        Quadruple();
-        ~Quadruple();
+class Quadruple : public Ability
+{
+public:
+    Quadruple();
+    ~Quadruple();
 
-        void executeAbility(Player*, long long& pts, vector<Player*>, DeckCards&, Turn&, map<Player*, Ability*>);
+    void executeAbility(Player *, long long &pts, vector<Player *>, DeckCards &, Turn &, map<Player *, Ability *>);
 };
 
-# endif
+#endif

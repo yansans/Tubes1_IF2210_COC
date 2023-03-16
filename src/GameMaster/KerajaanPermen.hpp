@@ -9,9 +9,10 @@
 #include "../Util/util.hpp"
 #include "../Storage/DeckStorage.hpp"
 
-class KerajaanPermen{
+class KerajaanPermen
+{
 private:
-    vector<Player*> players;
+    vector<Player *> players;
     TableCards tableCards;
     const long long winningScore = 1LL << 32;
     long long rewardPoint = 64;
@@ -25,9 +26,9 @@ private:
     void inputDeckCardLoop();
     long long highestScore();
     void displayEndGame();
-    void playerOptionInput(Player& player);
-    vector<Ability*> generateRandomAbility();
-    void playerMenu(Player& player);
+    void playerOptionInput(Player &player);
+    vector<Ability *> generateRandomAbility();
+    void playerMenu(Player &player);
     void drawCards(int round);
     void checkWinner();
     void gameLoop();
