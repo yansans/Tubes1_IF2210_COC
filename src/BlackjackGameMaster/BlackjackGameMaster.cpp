@@ -48,8 +48,8 @@ void BlackjackGameMaster::playGame()
             std::for_each(bot.begin(), bot.end(), [&](BlackjackBot &b)
                           { participant.push_back(&b); });
 
-            // std::shuffle(participant.begin(), participant.end(),
-            //     std::mt19937_64(std::chrono::steady_clock::now().time_since_epoch().count()));
+            std::shuffle(participant.begin(), participant.end(),
+                         std::mt19937_64(std::chrono::steady_clock::now().time_since_epoch().count()));
 
             break;
         }
