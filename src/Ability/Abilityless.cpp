@@ -8,8 +8,8 @@ Abilityless::~Abilityless() {}
 void Abilityless::executeAbility(Player* player, long long& pts, vector<Player*> players, DeckCards& deck, Turn& turn, map<Player*, Ability*> playerAbility) {
     bool allAbilityUsed = true;
 
-    for(auto it = playerAbility.begin(); it != playerAbility.end(); it++) {
-        if(!it->second->getIsUsed() || !it->second->getIsDisabled()) {
+    for(Player* other : players) {
+        if((other != player) && (!playerAbility[other]->getIsUsed() && !playerAbility[other]->getIsDisabled())) {
             allAbilityUsed = false;
         }
     }
@@ -35,7 +35,6 @@ void Abilityless::executeAbility(Player* player, long long& pts, vector<Player*>
         }
         else if(playerAbility[choosedPlayer]->getIsDisabled()) {
             cout << "Kartu ability " << choosedPlayer->getName() << " telah kamu matikan sebelumnya. Yah, sayang penggunaan kartu ini sia-sia";
-            throw StillCurrentTurn();
         }
         else {   
             playerAbility[choosedPlayer]->setIsDisabled(true);
@@ -43,4 +42,5 @@ void Abilityless::executeAbility(Player* player, long long& pts, vector<Player*>
             cout << "Kartu ability pemain " << choosedPlayer->getName() << " telah dimatikan.";
         }
     }
+    cout << endl;
 }

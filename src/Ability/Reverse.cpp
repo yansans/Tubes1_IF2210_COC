@@ -26,5 +26,5 @@ void Reverse::executeAbility(Player* player, long long& pts, vector<Player*> pla
         cout <<playersInTurn[i]->getName() << ' ';
     }
     cout << playersInTurn[0]->getName() << endl;
-    cout << "Kamu masih dapat melakukan perintah!" << endl;
+    cout << "Kamu masih dapat melakukan perintah!" << endl << endl;
 }
