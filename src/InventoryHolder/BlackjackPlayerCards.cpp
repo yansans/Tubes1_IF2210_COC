@@ -50,6 +50,10 @@ void BlackjackPlayerCards::outputHide(int hiddenCnt)
 {
     std::string hide = "*HIDDEN*";
     std::cout << "Kartu: ";
+    if (this->items.size() == 0) {
+        std::cout << "-" << std::endl;
+        return;
+    }
     for (int i = 0; i < this->items.size() - 1; i++) {
         if (i < hiddenCnt) std::cout << hide;
         else std::cout << this->items[i];
