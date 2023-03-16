@@ -180,31 +180,31 @@ void Combo::print_type() const{
     int type = get_combo_type();
     switch (type){
         case 1:
-            cout << "High card" << endl;
+            cout << "High card";
             break;
         case 2:
-            cout << "Pair" << endl;
+            cout << "Pair";
             break;
         case 3:
-            cout << "Two pair" << endl;
+            cout << "Two pair";
             break;
         case 4:
-            cout << "Three of a kind" << endl;
+            cout << "Three of a kind";
             break;
         case 5:
-            cout << "Straight" << endl;
+            cout << "Straight";
             break;
         case 6:
-            cout << "Flush" << endl;
+            cout << "Flush";
             break;
         case 7:
-            cout << "Full house" << endl;
+            cout << "Full house";
             break;
         case 8:
-            cout << "Four of a kind" << endl;
+            cout << "Four of a kind";
             break;
         case 9:
-            cout << "Straight flush" << endl;
+            cout << "Straight flush";
             break;
     }
 }
@@ -216,7 +216,7 @@ double Combo::get_draw_value() const{
     int type = get_combo_type();
     if (type == 6) {
         //  flush
-        int duplicate = get_combo_card<Card>().get_number();
+        duplicate = get_combo_card<Card>().get_number();
         duplicates = {duplicate};
         if (threekind_check().first) new_value = threekind_value();
         else if (twopair_check().first) new_value = twopair_value();
@@ -224,7 +224,7 @@ double Combo::get_draw_value() const{
         else new_value = highcard_value(duplicates);
     } else if (type == 9 || type == 5){
         // straight flush or straight
-        int duplicate = get_combo_card<Card>().get_number();
+        duplicate = get_combo_card<Card>().get_number();
         duplicates = {duplicate, duplicate-1, duplicate-2, duplicate-3, duplicate-4};
         if (threekind_check().first) new_value = threekind_value();
         else if (twopair_check().first) new_value = twopair_value();
@@ -232,7 +232,7 @@ double Combo::get_draw_value() const{
         else new_value = highcard_value(duplicates);
     } else if(type == 8){
         // four of a kind
-        int duplicate = get_combo_card<Card>().get_number();
+        duplicate = get_combo_card<Card>().get_number();
         duplicates = {duplicate};
         if (fullhouse_check().first) new_value = fullhouse_value();
         else if (threekind_check(duplicates).first) new_value = threekind_value(duplicates);
@@ -241,18 +241,18 @@ double Combo::get_draw_value() const{
     }
     else if (type == 7){
         // full house
-        auto duplicate = get_combo_card<pair<Card,Card>>();
-        int three_num = duplicate.first.get_number();
-        int two_num = duplicate.second.get_number();
+        auto duplicate_card = get_combo_card<pair<Card,Card>>();
+        int three_num = duplicate_card.first.get_number();
+        int two_num = duplicate_card.second.get_number();
         duplicates = {three_num, two_num};
         if (threekind_check({three_num}).first) new_value = threekind_value({three_num});
         else if (pair_check(duplicates).first) new_value = pair_value(duplicates);
         else new_value = highcard_value(duplicates);
     } else if (type == 3){
         // two pair
-        auto duplicate = get_combo_card<pair<Card,Card>>();
-        int first_num = duplicate.first.get_number();
-        int second_num = duplicate.second.get_number();
+        auto duplicate_card = get_combo_card<pair<Card,Card>>();
+        int first_num = duplicate_card.first.get_number();
+        int second_num = duplicate_card.second.get_number();
         duplicates = {first_num, second_num};
         if (pair_check(duplicates).first){
             new_value = pair_value(duplicates);
@@ -264,6 +264,18 @@ double Combo::get_draw_value() const{
         new_value = highcard_value(duplicates);
     }
     return new_value;
+}
+
+double Combo::get_hands_value() const{
+    auto first_card = cards[0];
+    auto second_card = cards[1];
+    auto higher_card = first_card > second_card ? first_card : second_card;
+    double value = higher_card.get_value();
+
+    if (first_card.get_number() == second_card.get_number()){
+        value = HIGH_CARD + higher_card.get_value() + 2;
+    } 
+    return value;
 }
 
 double Combo::highcard_value(vector<int> duplicates) const{
@@ -375,16 +387,20 @@ pair<bool,Card> Combo::straight_check() const{
     int idx;
     idx = copy_cards.size() - 1;
     int number = copy_cards[idx].get_number();
+    // iterasi cards dari angka terbesar
     for (int max = 0; max < 3; max++){
         int n = 1;
         for (int i = idx - 1 ; i >= 0 ; i--){
             if (copy_cards[i].get_number() == number){
+                // jika nomor kartu sama dengan nomor kartu terbesar
                 continue;
             }
             if (copy_cards[i].get_number() == number - 1){
+                // jika nomor kartu berurut
                 n++;
                 number--;
             } else {
+                // jika nomor kartu tidak berurut
                 idx = i;
                 break;
             }
@@ -454,8 +470,10 @@ pair<bool, pair<Card,Card>> Combo::fullhouse_check() const{
 
 ostream& operator<< (ostream& os, Combo c){
     os << "combo_type: " << c.get_combo_type() << " ";
+    c.print_type(); os << " ";
     os << "get_value: " << c.get_value() << " ";
-    os << "get_draw_value: " << c.get_draw_value();
+    os << "get_draw_value: " << c.get_draw_value() << " ";
+    os << "get_hands_value: " << c.get_hands_value();
     return os;
 }
 
