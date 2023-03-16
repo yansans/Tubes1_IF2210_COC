@@ -19,6 +19,7 @@ class BlackjackPlayer {
     int score();
 
     void printInfo();
+    void printInfoDealer(int hiddenCnt = 1);
 };
 
 #endif

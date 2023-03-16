@@ -7,7 +7,8 @@ void BlackjackGameMaster::playGame()
     auto printScore = [](BlackjackPlayer &player) {
         std::cout << "Skor: " << player.score() << (player.score() == -1 ? "(lebih dari 21)": "") << std::endl;
     };
-    std::cout << "Permainan blackjack(21) dimulai!" << std::endl;
+    std::cout << "Permainan blackjack dimulai!" << std::endl << std::endl;
+
     player.askForName();
     bot.setName("Bot 1");
     
@@ -16,7 +17,8 @@ void BlackjackGameMaster::playGame()
 
     std::cout << "Keadaan setelah pengambilan kartu awal" << std::endl;
     player.printInfo();
-    bot.printInfo();
+    std::cout << std::endl;
+    bot.printInfoDealer();
     std::cout << std::endl;
 
     player.playTurn(deck);
@@ -27,11 +29,11 @@ void BlackjackGameMaster::playGame()
     printScore(player);
     std::cout << std::endl;
 
-    bot.printInfo();
+    bot.printInfoDealer(0);
     printScore(bot);
     std::cout << std::endl;
     std::cout << std::endl;
-    
+
     if (player.score() == bot.score()) {
         std::cout << "Seri" << std::endl;
     }

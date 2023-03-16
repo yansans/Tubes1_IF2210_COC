@@ -20,6 +20,9 @@ void BlackjackPlayer::playTurn(BlackjackDeckCards &deck)
     auto printSplitCommand = []() {
         std::cout << "- split (buang dan ambil satu kartu; ditawarkan jika kedua kartu di tangan bernilai sama)" << std::endl;
     };
+    auto lower = [](std::string &s) {
+        for (char &c: s) if ('A' <= c && c <= 'Z') c = c + 32;
+    };
 
     std::cout << "=======================" << std::endl
               << name << "\'s turn" << std::endl
@@ -34,7 +37,9 @@ void BlackjackPlayer::playTurn(BlackjackDeckCards &deck)
                 printSplitCommand();
             }
             std::cout << "Perintah anda: ";
-            std::cin >> playerCommand;
+            std::getline(std::cin, playerCommand);
+            lower(playerCommand);
+
             if (playerCommand == "hit") {
                 std::cout << "Anda mendapat kartu " << deck.getTop() << std::endl;
                 this->cards << deck;
@@ -68,11 +73,15 @@ void BlackjackPlayer::playTurn(BlackjackDeckCards &deck)
         catch (exception &e) {
             std::cout << e.what() << std::endl;
         }
+        std::cout << std::endl;
     }
 }
 
 void BlackjackPlayer::playBot(BlackjackDeckCards &deck)
 {
+    std::cout << "=======================" << std::endl
+              << name << "\'s turn" << std::endl
+              << "=======================" << std::endl;
     while (cards.value() < 17) {
         std::cout << "Bot mengambil kartu " << deck.getTop() << std::endl;
         this->cards << deck;
@@ -83,7 +92,7 @@ void BlackjackPlayer::playBot(BlackjackDeckCards &deck)
 void BlackjackPlayer::askForName()
 {
     std::cout << "Name: ";
-    std::cin >> this->name;
+    std::getline(std::cin, this->name);
 }
 
 void BlackjackPlayer::setName(std::string name)
@@ -101,5 +110,11 @@ void BlackjackPlayer::printInfo()
 {
     std::cout << "Pemain " << name << std::endl
               << cards << std::endl;
+}
+
+void BlackjackPlayer::printInfoDealer(int hiddenCnt)
+{
+    std::cout << "Dealer " << name << std::endl;
+    this->cards.outputHide(hiddenCnt);
 }
 

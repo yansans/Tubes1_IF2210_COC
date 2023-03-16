@@ -24,7 +24,6 @@ class BlackjackPlayerCards: InventoryHolder<BlackjackCard> {
      * @return BlackjackPlayerCards& 
      */
     BlackjackPlayerCards& operator<<(BlackjackDeckCards& deck);
-
     /**
      * @brief return card to deck
      * 
@@ -35,6 +34,12 @@ class BlackjackPlayerCards: InventoryHolder<BlackjackCard> {
     friend BlackjackDeckCards& operator<<(BlackjackDeckCards& deck, BlackjackPlayerCards& playercards);
     
     friend std::ostream& operator<<(std::ostream& out, BlackjackPlayerCards& playercards);
+    /**
+     * @brief Output cards; first hiddenCnt cards is hidden.
+     * 
+     * @param hiddenCnt 
+     */
+    void outputHide(int hiddenCnt = 1);
 };
 
 #endif

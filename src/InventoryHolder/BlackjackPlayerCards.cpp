@@ -46,12 +46,25 @@ BlackjackPlayerCards& BlackjackPlayerCards::operator<<(BlackjackDeckCards& deck)
     return *this;
 }
 
+void BlackjackPlayerCards::outputHide(int hiddenCnt)
+{
+    std::string hide = "*HIDDEN*";
+    std::cout << "Kartu: ";
+    for (int i = 0; i < this->items.size() - 1; i++) {
+        if (i < hiddenCnt) std::cout << hide;
+        else std::cout << this->items[i];
+        std::cout << " && ";
+    }
+    if (this->items.size() <= hiddenCnt) std::cout << hide << std::endl;
+    else std::cout << this->items.back() << std::endl;
+}
+
 std::ostream& operator<<(std::ostream& out, BlackjackPlayerCards& playercards)
 {
-    std::cout << "Kartu: ";
+    out << "Kartu: ";
     for (int i = 0; i < playercards.items.size() - 1; i++) {
-        std::cout << playercards.items[i] << " && ";
+        out << playercards.items[i] << " && ";
     }
-    std::cout << playercards.items.back();
+    out << playercards.items.back();
     return out;
 }
