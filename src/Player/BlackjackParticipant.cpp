@@ -1,14 +1,17 @@
-#include "BlackjackPlayer.hpp"
+#include "BlackjackParticipant.hpp"
+#include "../Exception/Exception.h"
+#include "../Util/util.hpp"
+#include <set>
+#include <functional>
 
-int BlackjackPlayer::namedPlayerCount = 0;
+BlackjackParticipant::BlackjackParticipant() {}
 
-void BlackjackPlayer::askForName()
+void BlackjackParticipant::getInitialCards(BlackjackDeckCards &deck)
 {
-    std::cout << "Player " << ++namedPlayerCount << "'s name: ";
-    std::getline(std::cin, this->name);
+    this->cards << deck << deck;
 }
 
-void BlackjackPlayer::playTurn(BlackjackDeckCards &deck)
+void BlackjackParticipant::playTurn(BlackjackDeckCards &deck)
 {
     auto printCommands = []() {
         std::cout << "Commands:" << std::endl
@@ -75,9 +78,26 @@ void BlackjackPlayer::playTurn(BlackjackDeckCards &deck)
     }
 }
 
-void BlackjackPlayer::printInfo(int hideCnt)
+void BlackjackParticipant::askForName()
 {
-    std::cout << "Player " << name << std::endl;
-    this->cards.outputHide(hideCnt);
+    std::cout << "Name: ";
+    std::getline(std::cin, this->name);
 }
+
+void BlackjackParticipant::setName(std::string name)
+{
+    this->name = name;
+}
+
+int BlackjackParticipant::score()
+{
+    if (this->cards.isBust()) return -1;
+    return this->cards.value();
+}
+
+bool BlackjackParticipant::operator<(BlackjackParticipant &o)
+{
+    return this->score() < o.score();
+}
+
 

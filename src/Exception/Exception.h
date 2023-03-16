@@ -100,5 +100,10 @@ struct DuplicateCardException : public exception {
     }
 };
 
+struct ParticipantCountAboveLimit : public exception {
+    const char* what() const throw() {
+        return "Participant count cannot exceed limit";
+    }
+};
 
 #endif
