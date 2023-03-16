@@ -286,7 +286,7 @@ double Combo::pair_value(vector<int> duplicate) const{
     return HIGH_CARD + get_pair(duplicate).get_value() + 2;
 }
 double Combo::twopair_value() const{
-    return PAIR + get_twopair().first.get_value() + get_twopair().second.get_value() + 2;
+    return PAIR + (get_twopair().first.get_value() * 3) + (get_twopair().second.get_value() * 0.01) + 2;
 }
 double Combo::threekind_value(vector<int> duplicate) const{
     return TWO_PAIR + get_threekind(duplicate).get_value() + 3;
