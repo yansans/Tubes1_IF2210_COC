@@ -10,6 +10,7 @@ using namespace std;
 
 KerajaanPermen::~KerajaanPermen(){
     for(int i=0;i<players.size();i++){
+        abilityHolder.removeAbility(players[i]);
         delete players[i];
     }
 }

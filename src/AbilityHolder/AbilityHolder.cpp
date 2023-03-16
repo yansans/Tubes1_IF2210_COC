@@ -26,7 +26,9 @@ void AbilityHolder::removeAbility(Player* player) {
         throw PlayerDoesNotExist();
     }
 
-    this->playerAbility[player] = NULL;
+    if(playerAbility[player] != NULL){
+        delete this->playerAbility[player];
+    }
 }
 
 bool AbilityHolder::playerHasAbility(Player* player, Ability* ability) {
