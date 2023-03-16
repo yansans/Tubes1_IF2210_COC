@@ -44,7 +44,7 @@ compilecommand:
 
 
 # TEMPORARY FLAG FOR KERAJAAN PERMEN
-CLASSESPERMEN			= Ability Command Exception InventoryHolder Player GameFlow Values AbilityHolder Util BlackjackGameMaster
+CLASSESPERMEN			= Ability Command Exception InventoryHolder Player GameFlow Values AbilityHolder Util BlackjackGameMaster GameMaster
 MAINPERMEN				= $(SOURCE_FOLDER)/kerajaanpermenmain.cpp
 SRCPERMEN 				= $(foreach class, $(CLASSESPERMEN), $(wildcard $(SOURCE_FOLDER)/$(class)/*.cpp))\
 							

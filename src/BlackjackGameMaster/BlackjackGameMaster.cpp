@@ -1,6 +1,5 @@
 #include "BlackjackGameMaster.hpp"
 #include <iostream>
-#include <functional>
 
 void BlackjackGameMaster::playGame()
 {
