@@ -1,12 +1,12 @@
 #include "InventoryHolder/DeckCards.hpp"
-#include "Storage/DeckStorage.hpp"
 #include "BlackjackGameMaster/BlackjackGameMaster.hpp"
 #include "GameMaster/KerajaanPermen.hpp"
 #include "Exception/Exception.h"
 
 #include <iostream>
 
-int tanyaMainLagi(int status){ // status, 0 : awal, 1 : akhir
+DeckCards Deck;
+int mainMenu(int status){ // status, 0 : awal, 1 : akhir
     if(status == 0)printf("Pilih permainan:\n");
     else if(status == 1)printf("Lanjut?\n");
     printf("1. Main Kerajaan Permen\n");
@@ -38,9 +38,19 @@ int tanyaMainLagi(int status){ // status, 0 : awal, 1 : akhir
 }
 
 int main() {
-
-
-
+    int option;
+    int status = 0;
+    do{
+        option = mainMenu(status);
+        status = 1;
+        if(option == 1){
+            KerajaanPermen gamePermen;
+            gamePermen.playGame();
+        }else if(option == 2){
+            BlackjackGameMaster gameBlackjack;
+            gameBlackjack.playGame();
+        }
+    }while(option != 3);
 
     return 0;
 }

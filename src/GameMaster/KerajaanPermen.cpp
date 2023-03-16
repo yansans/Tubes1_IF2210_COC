@@ -106,8 +106,7 @@ void KerajaanPermen::playerOptionInput(Player& player){
     try{CommandList::execute(input, rewardPoint, player.getName());}
     catch(InvalidCommand e){
         try{
-            if(input == "GETPOINT")player.addPoint(rewardPoint); // ! sementara buat nge cheat
-            else abilityHolder.executeAbility(input, &player, rewardPoint, players, Deck, turn);
+            abilityHolder.executeAbility(input, &player, rewardPoint, players, Deck, turn);
         }catch(InvalidCommand e){
             throw InvalidOptionInputException();
         }

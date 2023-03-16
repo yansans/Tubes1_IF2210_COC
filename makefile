@@ -28,7 +28,8 @@ compile:
 	@$(CXX) $(CPPFLAGS) $(SRC) $(MAIN) -o $(OUTPUT_FOLDER)/$(EXECUTABLE)
 	@echo Compilation Done!
 
-
+runAfterIHaveCompiledThisMainProgram:
+	@$(OUTPUT_FOLDER)/$(EXECUTABLE)
 
 # Only play 1 game
 MAINPERMEN				= $(SOURCE_FOLDER)/kerajaanpermenmain.cpp

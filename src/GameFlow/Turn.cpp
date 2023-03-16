@@ -29,7 +29,6 @@ void Turn::reverse()
     players[0]->setDone(true);
     this->curPlayer = players[0];
     this->firstTurn = 0;
-    this->curTurn--;
 }
 vector<Player *> Turn::getPlayers()
 {
