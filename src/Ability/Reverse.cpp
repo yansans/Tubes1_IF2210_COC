@@ -32,5 +32,6 @@ void Reverse::executeAbility(Player *player, long long &pts, vector<Player *> pl
     cout << playersInTurn[0]->getName() << endl;
     cout << "Kamu masih dapat melakukan perintah!" << endl
          << endl;
+    playerAbility[player]->setIsUsed(true);
     throw StillCurrentTurn();
 }
