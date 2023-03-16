@@ -8,7 +8,7 @@ OUTPUT_FOLDER	= bin
 OBJECT_FOLDER	= bin/obj
 
 # FLAGS
-VERSION 		= --std=c++11
+VERSION 		= --std=c++17
 WARNING_CFLAG 	= -Wall -Wextra
 CPPFLAGS		= $(VERSION) 
 
